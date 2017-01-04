@@ -127,7 +127,6 @@ public class WiFiConnectingActivity extends BaseActivity {
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             if (!isScan) return;
-
             if ("resvent".equals(result.getDevice().getName())) {
                 WiFiConnectingActivity.this.device = result.getDevice();
                 connBluetooth();
@@ -272,11 +271,25 @@ public class WiFiConnectingActivity extends BaseActivity {
             }
 
             /*GATT 接收数据*/
-            if (action.equals(UartService.ACTION_DATA_Notification)) {// 接收到通知消息
+            if (action.equals(UartService.ACTION_DATA_Notification)) {  // 接收到通知消息
                 final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
-                if (sendwifi) {
-                    sendwifi = false;
-                    setSendwifi();
+                IDField.RetCode retCode = mService.SuperpositionDatac(txValue);
+                if (retCode == IDField.RetCode.RetOK){
+                    try {
+                        JSONObject json = mService.reqjson_OK.getroot();
+                        int resultCode = json.getJSONObject("body").getInt("result_code");
+                        if (sendwifi) {
+                            sendwifi = false;
+                            setSendwifi();
+                        }else if (resultCode == 0){
+                            timeouthandler.removeCallbacks(timeoutrunnable);
+                            //wifi链接成功
+                        }else{
+                            timeouthandler.postDelayed(timeoutrunnable,3000);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -286,7 +299,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     public void setSendwifi() {
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "set", "profile");
-        Map<String, String> body = WriteDataUtils.getInstance().getBody(wifiname, "wpa", wifiname);
+        Map<String, String> body = WriteDataUtils.getInstance().getBody(wifiname, "wpa", wifipassword);
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
         wifidata.put("header", header);
         wifidata.put("body", body);
@@ -301,7 +314,16 @@ public class WiFiConnectingActivity extends BaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        timeouthandler.postDelayed(timeoutrunnable,90000);
     }
 
+    Handler timeouthandler = new Handler();
+
+    Runnable timeoutrunnable = new Runnable() {
+        @Override
+        public void run() {
+            setSendwifi();
+        }
+    };
 
 }
