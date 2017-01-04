@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_black" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            >
+
+            <com.huagu.RX.rongxinmedical.widget.CircleImageView
+                android:id="@+id/myavatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_20"
+                app:border_color="@color/thinThemeColor"
+                app:border_width="@dimen/dimen_10"
+                app:layout_heightPercent="50%w"
+                app:layout_widthPercent="50%w"
+                />
+
+            <TextView
+                android:id="@+id/left_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Dr.Li"
+                android:textColor="@color/ThemeColor"
+                android:textSize="@dimen/textsize_20"
+                android:textStyle="bold"
+                app:layout_marginBottomPercent="10%w"/>
+
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5">
+
+                <ImageView
+                    android:id="@+id/one"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:src="@drawable/left_item_img_select3"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/one"
+                    android:singleLine="true"
+                    android:text="@string/MyDevice"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:visibility="gone"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5">
+
+                <ImageView
+                    android:id="@+id/two"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select2"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/two"
+                    android:singleLine="true"
+                    android:text="@string/MyAccessory"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5">
+
+                <ImageView
+                    android:id="@+id/three"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select5"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/three"
+                    android:singleLine="true"
+                    android:text="@string/Settings"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5">
+
+                <ImageView
+                    android:id="@+id/four"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select6"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/four"
+                    android:singleLine="true"
+                    android:text="@string/MessageCenter"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5">
+
+                <ImageView
+                    android:id="@+id/five"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select4"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/five"
+                    android:singleLine="true"
+                    android:text="@string/FAQ"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:visibility="gone"
+                android:padding="@dimen/dimen_5"
+                >
+
+                <ImageView
+                    android:id="@+id/six"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select1"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/six"
+                    android:singleLine="true"
+                    android:text="@string/About"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+
+            <com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout
+                android:id="@+id/item7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_item_select"
+                android:clickable="true"
+                android:padding="@dimen/dimen_5"
+                >
+
+                <ImageView
+                    android:id="@+id/seven"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/left_item_img_select7"
+                    app:layout_marginLeftPercent="20%w"/>
+
+                <TextView
+                    android:id="@+id/text7"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_toRightOf="@id/seven"
+                    android:singleLine="true"
+                    android:text="@string/SignOut"
+                    android:textColor="@color/gray_left"
+                    android:textSize="@dimen/textsize_18"/>
+
+            </com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>
+        </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+    </ScrollView>
+</com.huagu.RX.rongxinmedical.widget.PercentRelativeLayout>

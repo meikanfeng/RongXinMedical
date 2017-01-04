@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/wifisetting_example"
+            app:layout_marginTopPercent="6%h"
+            />
+
+        <EditText
+            android:id="@+id/wifi_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginLeftPercent="8%w"
+            app:layout_marginRightPercent="8%w"
+            app:layout_marginTopPercent="5%h"
+            android:text="AndroidAP6033"
+            android:hint="Wi-Fi:"
+            android:background="@drawable/edit_bg"/>
+
+        <EditText
+            android:id="@+id/wifi_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginLeftPercent="8%w"
+            app:layout_marginRightPercent="8%w"
+            app:layout_marginTopPercent="3%h"
+            android:text="111111999999"
+            android:hint="wifi password"
+            android:background="@drawable/edit_bg"/>
+
+        <TextView
+            android:id="@+id/search_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_15"
+            app:layout_marginLeftPercent="8%w"
+            app:layout_marginRightPercent="8%w"
+            app:layout_marginTopPercent="6%h"
+            android:text="Searching Device"
+            android:gravity="center"
+            android:background="@drawable/button_themecolor"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_18"/>
+
+    </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/patientlist_search"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dimen_8"
+        android:layout_margin="@dimen/dimen_8"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/searchedit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparency"
+            android:gravity="center_vertical"
+            android:hint="@string/search"
+            android:paddingLeft="@dimen/padding"
+            android:textColorHint="@color/gray_left"
+            android:textSize="@dimen/textsize_20"/>
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="@dimen/dimen_35"
+            android:layout_height="@dimen/dimen_35"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/dimen_5"
+            android:src="@drawable/patient_search"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_marginBottomPercent="12%h"
+            app:layout_marginLeftPercent="8%w"
+            app:layout_marginRightPercent="8%w"
+            app:layout_marginTopPercent="12%h">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/phone"
+                app:layout_heightPercent="23%w"
+                app:layout_widthPercent="23%w"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/wifi_ddd"
+                app:layout_marginPercent="3%w"
+                app:layout_widthPercent="23%w"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/online"
+                app:layout_heightPercent="50%w"
+                app:layout_widthPercent="50%w"
+                />
+
+        </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+        <ListView
+            android:id="@+id/status_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="30%h"
+            android:divider="@color/backColor"
+            android:scrollbars="none"
+            android:dividerHeight="0dp"
+            />
+
+        <TextView
+            android:id="@+id/upload_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/Uploadtherapydata"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_18"
+            android:gravity="center"
+            app:layout_marginLeftPercent="12%w"
+            app:layout_marginRightPercent="12%w"
+            app:layout_marginTopPercent="6%w"
+            android:background="@drawable/mydevice_button"/>
+
+    </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+
+</LinearLayout>

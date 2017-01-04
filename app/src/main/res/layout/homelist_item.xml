@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/backColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_item_bg"
+        android:layout_marginLeft="@dimen/dimen_10"
+        android:layout_marginRight="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_8"
+        android:layout_marginTop="@dimen/dimen_8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding"
+            android:layout_marginRight="@dimen/padding"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:paddingBottom="@dimen/dimen_8"
+                android:paddingTop="@dimen/dimen_8"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/dimen_8"
+                    android:gravity="center|left"
+                    android:text="@string/Pressure"
+                    android:textSize="@dimen/textsize_22"
+                    android:textStyle="bold"/>
+
+                <com.huagu.RX.rongxinmedical.widget.CustomTextView
+                    android:id="@+id/bottom_ms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
+                    android:text="10.0"
+                    android:textColor="@color/chart_value"
+                    android:textSize="@dimen/textsize_28"
+                    android:textStyle="bold"
+                    />
+
+                <com.huagu.RX.rongxinmedical.widget.CustomTextView
+                    android:id="@+id/units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/cmH2O"
+                    android:textColor="@color/gray_96"
+                    android:textSize="@dimen/textsize_16"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/max_95th_median"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left">
+
+                    <com.huagu.RX.rongxinmedical.widget.CustomTextView
+                        android:id="@+id/max"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/square_thinyellow"
+                        android:drawablePadding="3dp"
+                        android:singleLine="true"
+                        android:text="@string/Maximum"
+                        android:textColor="@color/chart_yellow"
+                        android:textSize="@dimen/textsize_16"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.huagu.RX.rongxinmedical.widget.CustomTextView
+                        android:id="@+id/th95"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/square_thinorange"
+                        android:drawablePadding="3dp"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/th95_Percentile"
+                        android:textColor="@color/chart_cyan"
+                        android:textSize="@dimen/textsize_16"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.huagu.RX.rongxinmedical.widget.CustomTextView
+                        android:id="@+id/median"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/square_thinblue"
+                        android:drawablePadding="3dp"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/Median"
+                        android:textColor="@color/chart_blue"
+                        android:textSize="@dimen/textsize_16"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="@dimen/dimen_15"
+            android:layout_marginLeft="@dimen/dimen_15"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:background="@color/thingray"/>
+
+        <com.huagu.RX.rongxinmedical.View.ChartView
+            android:id="@+id/chartview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8"/>
+
+
+    </LinearLayout>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="@color/thin"/>-->
+
+</LinearLayout>

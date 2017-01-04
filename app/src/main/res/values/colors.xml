@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="lucency_White">#66FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="transparency">#00000000</color>
+    <color name="ThemeColor">#20B3AF</color>
+    <color name="thinThemeColor">#AA20B3AF</color>
+    <color name="thinthinThemeColor">#3320B3AF</color>
+    <color name="gray">#FFCCCCCC</color>
+    <color name="thingray">#CDCDCB</color>
+    <color name="gray_96">#FF969696</color>
+    <color name="gray_left">#FFAAAAAA</color>
+    <color name="black_gray">#666666</color>
+    <color name="gray_black">#222222</color>
+    <color name="thinblue">#99BBE9</color>
+    <color name="thinorange">#F6AB8C</color>
+    <color name="thinyellow">#FFDB91</color>
+
+    <color name="chart_value">#FFFF6600</color>
+
+    <color name="chart_blue">#5999D0</color>
+    <color name="chart_cyan">#56DDD9</color>
+    <color name="chart_yellow">#FFAE00</color>
+
+    <color name="thin_t_gray">#F5F5F5</color>
+    <color name="thinwhite">#FFEEEEEE</color>
+    <color name="thin">#FFDCDCDC</color>
+    <color name="backColor">#FFF8F8F8</color>
+    <color name="message_timebackgroup">#FFE1E1E1</color>
+    <color name="message_bottom">#FFEEEEEE</color>
+</resources>

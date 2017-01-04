@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.MyDeviceWiFiSettingTipsActivity">
+
+    <include layout="@layout/title"/>
+
+    <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dimen_15">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:src="@mipmap/wifisetting_tips"
+            android:scaleType="centerCrop"
+            app:layout_widthPercent="100%w"
+            app:layout_heightPercent="60%w"/>
+
+        <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dimen_15"
+            app:layout_marginPercent="10%w">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifisettingtips1"
+                android:layout_margin="@dimen/dimen_15"
+                android:textColor="@color/ThemeColor"
+                android:textSize="@dimen/textsize_16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifisettingtips2"
+                android:layout_margin="@dimen/dimen_15"
+                android:textColor="@color/ThemeColor"
+                android:textSize="@dimen/textsize_16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifisettingtips3"
+                android:layout_margin="@dimen/dimen_15"
+                android:textColor="@color/ThemeColor"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize_16"/>
+
+            <TextView
+                android:id="@+id/wifitips_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_10"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/dimen_10"
+                android:text="@string/next"
+                android:background="@drawable/button_themecolor"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textsize_18"/>
+
+        </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+    </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+</LinearLayout>

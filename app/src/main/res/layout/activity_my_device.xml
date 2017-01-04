@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.huagu.RX.rongxinmedical.widget.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_marginPercent="10%w">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_5"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Model"
+                    android:textColor="@color/black_gray"
+                    android:textSize="@dimen/textsize_18"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/mydevice_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:textColor="@color/black_gray"
+                    android:text="SpringA(Offline)"
+                    android:textSize="@dimen/textsize_18"/>
+                <!--android:drawablePadding="@dimen/dimen_10"-->
+                <!--android:drawableRight="@drawable/mydevice_on_or_off"-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_5"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/SN"
+                    android:textColor="@color/black_gray"
+                    android:textSize="@dimen/textsize_18"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/mydevice_sn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="20160816789001"
+                    android:textColor="@color/black_gray"
+                    android:textSize="@dimen/textsize_18"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mydevice_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_marginTopPercent="12%w"
+            app:layout_marginBottomPercent="5%w"
+            app:layout_widthPercent="80%w"
+            app:layout_heightPercent="80%w"
+            android:scaleType="fitXY"
+            android:src="@drawable/mydevice_img"
+            />
+
+        <TextView
+            android:id="@+id/mydevice_initial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mydevice_button"
+            android:text="@string/Initialwificonnection"
+            app:layout_marginBottomPercent="5%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginRightPercent="5%w"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:padding="@dimen/dimen_10"/>
+
+        <TextView
+            android:id="@+id/mydevice_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mydevice_button"
+            android:text="@string/Uploadtherapydata"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginRightPercent="5%w"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:padding="@dimen/dimen_10"/>
+    </com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>
+
+</com.huagu.RX.rongxinmedical.widget.PercentLinearLayout>

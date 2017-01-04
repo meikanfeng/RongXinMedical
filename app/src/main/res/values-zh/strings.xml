@@ -1,0 +1,231 @@
+<resources>
+    <string name="app_name">融昕</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">请输入用户名</string>
+    <string name="prompt_password">请输入密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_email">邮件地址无效</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_empty_password">密码为空</string>
+    <string name="error_incorrect_password">密码不正确</string>
+    <string name="error_field_required">此字段必须填写</string>
+    <string name="register_user">注册账户</string>
+    <string name="forget_password">忘记密码</string>
+
+    <string name="login_tips">登录成功</string>
+
+    <!--首页数据-->
+    <string name="Usage">Usage</string>
+    <string name="MaskFit">MaskFit</string>
+    <string name="Event">Event</string>
+    <string name="Humidifier">Humidifier</string>
+    <string name="Maximum">Maximum</string>
+    <string name="th95_Percentile">95th Percentile</string>
+    <string name="Median">Median</string>
+    <string name="Pressure">Pressure</string>
+    <string name="cmH2O">cmH2O</string>
+    <!--侧滑菜单栏-->
+    <string name="MyDevice">我的设备</string>
+    <string name="MyAccessory">我的附件</string>
+    <string name="MessageCenter">消息中心</string>
+    <string name="Settings">设置</string>
+    <string name="FAQ">常见问题</string>
+    <string name="About">关于我们</string>
+    <string name="SignOut">退出登录</string>
+
+    <string name="left_name" formatted="false">%1s.%2s</string>
+    <!--帮助中心-->
+    <string name="HelpCenter">常见问题</string>
+
+    <!--病人列表-->
+    <string name="patientlist_ageandsex" formatted="false">%2s/%1s</string>
+    <string name="patientlist_id" formatted="false">ID:%s</string>
+    <string name="patientlist_update" formatted="false">%s</string>
+    <string name="search">搜索</string>
+    <string name="PatientList">病人列表</string>
+    <string name="search_content">请输入搜索内容</string>
+    <string name="commonproblem">普通问题</string>
+
+    <!--消息列表-->
+    <string name="send">发送</string>
+    <string name="MessageList">消息列表</string>
+    <string name="messagecontent_tips">消息内容为空</string>
+
+
+    <!--睡眠排行-->
+    <string name="SleepQualityRankings">睡眠排行</string>
+
+    <!--用户信息-->
+    <string name="MyInfo">My Info</string>
+    <string name="album">相册</string>
+    <string name="photograph">拍照</string>
+    <string name="cancel">取消</string>
+    <string name="avatar_upLoad_Tips_success">头像上传成功</string>
+    <string name="avatar_upLoad_Tips_fail">头像上传失败</string>
+    <string-array name="Sexs">
+        <item>女</item>
+        <item>男</item>
+    </string-array>
+    <string-array name="unit">
+        <item>/岁</item>
+        <item>/厘米</item>
+        <item>/千克</item>
+    </string-array>
+    <string-array name="patient_info">
+        <item>ID:</item>
+        <item>Name:</item>
+        <item>Sex:</item>
+        <item>Age:</item>
+        <item>Height:</item>
+        <item>Weight:</item>
+        <item></item>
+        <item>Phone:</item>
+        <item>Email:</item>
+        <item>Instant Messaging Account</item>
+        <item></item>
+        <item>Treating Doctor ID:</item>
+        <item>Institutuin ID:</item>
+    </string-array>
+    <string-array name="doctor_info">
+        <item>ID:</item>
+        <item>Name:</item>
+        <item></item>
+        <item>Department:</item>
+        <item>Phone:</item>
+        <item>Institutuin ID:</item>
+    </string-array>
+
+    <!--我的设备-->
+    <!--<string name="MyDevice">My Device</string>-->
+    <string name="Model">Model:</string>
+    <string name="SN">SN:</string>
+    <string name="Initialwificonnection">初始化wifi连接</string>
+    <string name="Uploadtherapydata">上传治疗数据</string>
+    <string name="dialogcontent">打开蓝牙允许“Resvent”连接配件。</string>
+    <string name="Setting">设置</string>
+    <string name="No_update">暂无更新</string>
+    <string name="ble_not_supported">不支持ble4.0</string>
+    <string name="open_ble">打开蓝牙</string>
+    <string name="is_open_ble">是否打开蓝牙?</string>
+    <string name="Opening_the_bluetooth">打开蓝牙中</string>
+
+
+    <!--WiFi设置-->
+    <string name="wifisettingtips1">1.请启动你的设备。</string>
+    <string name="wifisettingtips2">2.在设备进入设置菜单。</string>
+    <string name="wifisettingtips3">3.按下蓝牙按钮.</string>
+    <string name="next">下一步</string>
+
+    <!--确认设置wifi-->
+    <string name="Confirm_Wifi_Info">确认wifi</string>
+    <string name="Wi_Fi">wifi名:</string>
+    <string name="Please_input_wifi_password">请输入wifi密码</string>
+    <string name="Searching_Device">搜索设备</string>
+    <string name="Confirm_Wifi_Info_tips">不支持\"5G\"Wi-Fi 建议连接其他Wi-Fi</string>
+    <string name="wifi_name_enter">请输入wifi名</string>
+    <string name="wifi_password_enter">请输入wifi密码</string>
+
+    <!--设置wifi-->
+    <string-array name="Connecting_Wifi">
+        <item>搜索设备中...</item>
+        <item>正在连接设备...</item>
+        <item>正在匹配服务...</item>
+        <item>发送wifi账号密码到设备...</item>
+        <item>初始化wifi成功...</item>
+    </string-array>
+    <string name="Searching_device...">搜索设备中...</string>
+    <string name="Connecting_device...">正在连接设备...</string>
+    <string name="Sending_wifi_to_device...">发送wifi账号密码到设备...</string>
+    <string name="Initializing_WiFi_connection_success...">初始化wifi成功...</string>
+
+    <!--设置-->
+    <string name="Unit">单位</string>
+    <string name="Height">高</string>
+    <string name="Weight">体重</string>
+    <!--<string name="Pressure">Pressure</string>-->
+    <string name="Leak_Flow">漏气量</string>
+    <string name="Time">时间</string>
+    <string name="Format">格式</string>
+    <string name="Check_for_update">检查更新</string>
+    <string-array name="height">
+        <item>CM</item>
+        <item>IN</item>
+    </string-array>
+    <string-array name="weight">
+        <item>KG</item>
+        <item>LB</item>
+    </string-array>
+    <string-array name="pressure">
+        <item>HPA</item>
+        <item>MBR</item>
+        <item>CMH20</item>
+    </string-array>
+    <string-array name="leak_flow">
+        <item>L/SEC</item>
+        <item>L/MIN</item>
+    </string-array>
+    <string-array name="format">
+        <item>AM/PM</item>
+        <item>24HOUR</item>
+    </string-array>
+
+    <!--关于我们-->
+    <string name="Resvent_Medical">Resvent Medical %s</string>
+    <string name="copyright">Copyright©2016 Resvent Medical Technology CO.,Ltd.</string>
+
+    <!--找回密码-->
+    <string name="find_password">找回密码</string>
+    <string name="phone_num">请输入手机号码</string>
+    <string name="veification_code">请输入验证码</string>
+    <string name="veification">验证码</string>
+    <string name="no_phone_Tips">请先输入手机号码</string>
+    <string name="no_vericode_Tips">请输入验证码</string>
+    <string name="vericode_error_Tips">验证码错误</string>
+    <string name="phone_error_Tips">手机号码格式错误</string>
+    <string name="password">密码</string>
+    <string name="confirm_password">再输入一次密码</string>
+    <string name="submit">提交</string>
+
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string-array name="week">
+        <item>星期天</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+    <string-array name="weeks">
+        <item>天</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>July</item>
+        <item>Aug</item>
+        <item>Sept</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+
+
+
+</resources>

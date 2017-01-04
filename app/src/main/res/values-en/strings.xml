@@ -1,0 +1,229 @@
+<resources>
+    <string name="app_name">RongXin</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Please enter the account</string>
+    <string name="prompt_password">Please enter your password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="error_invalid_email">error_invalid_email</string>
+    <string name="error_invalid_password">error_invalid_password</string>
+    <string name="error_empty_password">error_empty_password</string>
+    <string name="error_incorrect_password">error_incorrect_password</string>
+    <string name="error_field_required">error_field_required</string>
+    <string name="register_user">register_user</string>
+    <string name="forget_password">forget_password</string>
+
+    <string name="login_tips">Login Success</string>
+
+    <!--首页数据-->
+    <string name="Usage">Usage</string>
+    <string name="MaskFit">MaskFit</string>
+    <string name="Event">Event</string>
+    <string name="Humidifier">Humidifier</string>
+    <string name="Maximum">Maximum</string>
+    <string name="th95_Percentile">95th Percentile</string>
+    <string name="Median">Median</string>
+    <string name="Pressure">Pressure</string>
+    <string name="cmH2O">cmH2O</string>
+    <!--侧滑菜单栏-->
+    <string name="MyDevice">My Device</string>
+    <string name="MyAccessory">My Accessory</string>
+    <string name="MessageCenter">Message Center</string>
+    <string name="Settings">Settings</string>
+    <string name="FAQ">FAQ</string>
+    <string name="About">About</string>
+    <string name="SignOut">Sign Out</string>
+
+    <string name="left_name" formatted="false">%1s.%2s</string>
+
+    <!--帮助中心-->
+    <string name="HelpCenter">Help Center</string>
+
+    <!--病人列表-->
+    <string name="patientlist_ageandsex" formatted="false">%2s/%1s</string>
+    <string name="patientlist_id" formatted="false">ID:%s</string>
+    <string name="patientlist_update" formatted="false">%s</string>
+    <string name="search">search</string>
+    <string name="PatientList">Patient List</string>
+    <string name="search_content">Please input search content</string>
+    <string name="commonproblem">Common problem</string>
+
+    <!--消息列表-->
+    <string name="send">send</string>
+    <string name="MessageList">Message List</string>
+    <string name="messagecontent_tips">The message content is empty</string>
+
+    <!--睡眠排行-->
+    <string name="SleepQualityRankings">Sleep Quality Rankings</string>
+
+    <!--用户信息-->
+    <string name="MyInfo">My Info</string>
+    <string name="album">album</string>
+    <string name="photograph">photograph</string>
+    <string name="cancel">cancel</string>
+    <string name="avatar_upLoad_Tips_success">Avatar uploaded successfully</string>
+    <string name="avatar_upLoad_Tips_fail">Avatar uploaded failure</string>
+    <string-array name="Sexs">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="unit">
+        <item>/YEAR</item>
+        <item>/CM</item>
+        <item>/KG</item>
+    </string-array>
+    <string-array name="patient_info">
+        <item>ID:</item>
+        <item>Name:</item>
+        <item>Sex:</item>
+        <item>Age:</item>
+        <item>Height:</item>
+        <item>Weight:</item>
+        <item></item>
+        <item>Phone:</item>
+        <item>Email:</item>
+        <item>Instant Messaging Account</item>
+        <item></item>
+        <item>Treating Doctor ID:</item>
+        <item>Institutuin ID:</item>
+    </string-array>
+    <string-array name="doctor_info">
+        <item>ID:</item>
+        <item>Name:</item>
+        <item></item>
+        <item>Department:</item>
+        <item>Phone:</item>
+        <item>Institutuin ID:</item>
+    </string-array>
+
+    <!--我的设备-->
+    <!--<string name="MyDevice">My Device</string>-->
+    <string name="Model">Model:</string>
+    <string name="SN">SN:</string>
+    <string name="Initialwificonnection">Initial wifi connection</string>
+    <string name="Uploadtherapydata">Upload therapy data</string>
+    <string name="dialogcontent">Open the bluetooth allows\"Resvent\" connect to the accessories.</string>
+    <string name="Setting">Setting</string>
+    <string name="No_update">No update</string>
+    <string name="ble_not_supported">Does not support bluetooth 4.0</string>
+    <string name="open_ble">Open the bluetooth</string>
+    <string name="is_open_ble">Whether to open the bluetooth</string>
+    <string name="Opening_the_bluetooth">Openint the bluetooth</string>
+
+    <!--WiFi设置-->
+    <string name="wifisettingtips1">1.Please start up your device.</string>
+    <string name="wifisettingtips2">2.Enter Setting menu on device.</string>
+    <string name="wifisettingtips3">3.Press Blue Network button.</string>
+    <string name="next">Next</string>
+
+    <!--确认设置wifi-->
+    <string name="Confirm_Wifi_Info">Confirm WiFi Info</string>
+    <string name="Wi_Fi">Wi-Fi:</string>
+    <string name="Please_input_wifi_password">Please input wifi password</string>
+    <string name="Searching_Device">Searching Device</string>
+    <string name="Confirm_Wifi_Info_tips">Not Support 5G Wi-Fi Suggest to connect other Wi-Fi</string>
+    <string name="wifi_name_enter">Please enter the name of wifi</string>
+    <string name="wifi_password_enter">Please enter the wifi password</string>
+
+    <!--设置wifi-->
+    <string-array name="Connecting_Wifi">
+        <item>Searching device...</item>
+        <item>Connecting device...</item>
+        <item>Discover service...</item>
+        <item>Sending wifi to device...</item>
+        <item>Initializing WiFi connection success...</item>
+    </string-array>
+    <string name="Searching_device...">Searching device...</string>
+    <string name="Connecting_device...">Connecting device...</string>
+    <string name="Sending_wifi_to_device...">Sending wifi to device...</string>
+    <string name="Initializing_WiFi_connection_success...">Initializing WiFi connection success...</string>
+
+    <!--设置-->
+    <string name="Unit">Unit</string>
+    <string name="Height">Height</string>
+    <string name="Weight">Weight</string>
+    <!--<string name="Pressure">Pressure</string>-->
+    <string name="Leak_Flow">Leak/Flow</string>
+    <string name="Time">Time</string>
+    <string name="Format">Format</string>
+    <string name="Check_for_update">Check for update</string>
+    <string-array name="height">
+        <item>CM</item>
+        <item>IN</item>
+    </string-array>
+    <string-array name="weight">
+        <item>KG</item>
+        <item>LB</item>
+    </string-array>
+    <string-array name="pressure">
+        <item>HPA</item>
+        <item>MBR</item>
+        <item>CMH20</item>
+    </string-array>
+    <string-array name="leak_flow">
+        <item>L/SEC</item>
+        <item>L/MIN</item>
+    </string-array>
+    <string-array name="format">
+        <item>AM/PM</item>
+        <item>24HOUR</item>
+    </string-array>
+
+    <!--关于我们-->
+    <string name="Resvent_Medical">Resvent Medical %s</string>
+    <string name="copyright">Copyright©2016 Resvent Medical Technology CO.,Ltd.</string>
+
+    <!--找回密码-->
+    <string name="find_password">Find Password</string>
+    <string name="phone_num">You phone number</string>
+    <string name="veification_code">Veification Code</string>
+    <string name="veification">Veification</string>
+    <string name="no_phone_Tips">Please enter the phone number</string>
+    <string name="no_vericode_Tips">Please enter validation code</string>
+    <string name="vericode_error_Tips">Verification code error</string>
+    <string name="phone_error_Tips">Phone number format error</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="submit">Submit</string>
+
+
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string-array name="week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="weeks">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thurs</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>July</item>
+        <item>Aug</item>
+        <item>Sept</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+
+</resources>

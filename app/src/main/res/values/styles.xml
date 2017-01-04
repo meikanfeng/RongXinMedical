@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/ThemeColor</item>
+        <item name="colorPrimaryDark">@color/ThemeColor</item>
+        <item name="colorAccent">@color/gray</item>
+    </style>
+
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_dismiss</item>
+    </style>
+
+    <style name="widget" />
+    <style name="widget.menudrawer">
+        <item name="mdMenuBackground">@color/ThemeColor</item>
+        <item name="mdContentBackground">?android:attr/windowBackground</item>
+        <item name="mdDrawerOpenUpContentDescription">打开</item>
+        <item name="mdDrawerClosedUpContentDescription">关闭</item>
+    </style>
+
+    <declare-styleable name="MaterialMenuView">
+        <attr name="mm_color" format="color"/>
+        <attr name="mm_visible" format="boolean"/>
+        <attr name="mm_scale" format="integer"/>
+        <attr name="mm_transformDuration" format="integer"/>
+        <attr name="mm_strokeWidth" format="integer"/>
+        <attr name="mm_rtlEnabled" format="boolean"/>
+    </declare-styleable>
+
+</resources>

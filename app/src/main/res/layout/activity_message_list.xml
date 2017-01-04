@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    tools:context="com.huagu.RX.rongxinmedical.Activity.MessageListActivity">
+
+    <include layout="@layout/title"
+             android:id="@+id/titles"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/message_bottom"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/dimen_15">
+
+        <EditText
+            android:id="@+id/message_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/patientlist_search"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:padding="@dimen/dimen_5"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_themecolor"/>
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/message_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom"
+        android:stackFromBottom="true"
+        android:scrollbars="none"
+        android:dividerHeight="0dp"
+        android:divider="@color/backColor"
+        android:transcriptMode="disabled"
+        android:layout_below="@id/titles"/>
+
+
+</RelativeLayout>
