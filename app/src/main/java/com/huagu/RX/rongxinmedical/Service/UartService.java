@@ -136,8 +136,10 @@ public class UartService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             byte[] txValue = characteristic.getValue();
-            broadcastUpdate(ACTION_DATA_Notification, characteristic);
-//            SuperpositionDatac(txValue);
+            IDField.RetCode retCode = SuperpositionDatac(txValue);
+            if (retCode == IDField.RetCode.RetOK){
+                broadcastUpdate(ACTION_DATA_Notification, reqjson_OK.toString());
+            }
         }
     };
 
@@ -145,16 +147,13 @@ public class UartService extends Service {
 
     public IDField.RetCode SuperpositionDatac(byte[] txValue){
         try {
-            ToJson reqjson = new ToJson();
+            reqjson_OK = new ToJson();
             byte[] txValue1 = JointData(txValue);
-            IDField.RetCode retCode = reqjson.parse(txValue1, txValue1.length);
-
+            IDField.RetCode retCode = reqjson_OK.parse(txValue1, txValue1.length);
+            Log.e("xxxxxxxxxxxxx","xxxxxxxxx: "+retCode);
             if(retCode == IDField.RetCode.RetOK){
-                Log.e("xxxx",reqjson.toString());
-                Log.e("xxxxx","xxxxxxxxx: "+retCode);
-                data =null;
-                data1 =null;
-                reqjson_OK = reqjson;
+                Log.e("xxxxxxxxxxxxx", reqjson_OK.toString());
+                data =null; data1 =null;
                 return retCode;
             }else {
                 Log.e("xxxxx","xxxxxxxxx: "+retCode);
@@ -213,6 +212,13 @@ public class UartService extends Service {
             //Log.d(TAG, String.format("Received TX: %d",data));
             intent.putExtra(EXTRA_DATA, data);
         }
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+
+    private void broadcastUpdate(String action,String str) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_DATA, str);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -424,12 +430,6 @@ public class UartService extends Service {
                 }
             }
         }).start();
-    }
-
-    private void broadcastUpdate(final String action,String act) {
-        final Intent intent = new Intent(action);
-        intent.putExtra("act", act);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
 //    String reqstatus = "{\"header\":{\"msg_id\":14,\"dev_id\":\"EEEEEEEEEEEE\",\"action\":\"get\",\"module\":\"profile\"},\"body\":{}}";

@@ -272,28 +272,68 @@ public class WiFiConnectingActivity extends BaseActivity {
 
             /*GATT 接收数据*/
             if (action.equals(UartService.ACTION_DATA_Notification)) {  // 接收到通知消息
-                final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
-                IDField.RetCode retCode = mService.SuperpositionDatac(txValue);
-                if (retCode == IDField.RetCode.RetOK){
-                    try {
-                        JSONObject json = mService.reqjson_OK.getroot();
+                String txValue = intent.getStringExtra(UartService.EXTRA_DATA);
+                Log.e("xxxxxxxxxxxxx","  ffffff: "+ txValue);
+                try {
+                    JSONObject json = new JSONObject(txValue);
+                    if (sendwifi) {
+                        sendwifi = false;
+                        setSendwifi();
+                        return;
+                    }
+                    if ("profile".equals(json.getJSONObject("header").getString("module"))){
+                        if (!json.getJSONObject("body").has("result_code")) return;
                         int resultCode = json.getJSONObject("body").getInt("result_code");
-                        if (sendwifi) {
-                            sendwifi = false;
-                            setSendwifi();
-                        }else if (resultCode == 0){
+                        if (resultCode == 144) {
+                            timeouthandler.removeCallbacks(getststusrunnable);
                             timeouthandler.removeCallbacks(timeoutrunnable);
                             //wifi链接成功
-                        }else{
-                            timeouthandler.postDelayed(timeoutrunnable,3000);
+                        } else if (resultCode == 145) {
+                            Toast.makeText(WiFiConnectingActivity.this, "wifi连接中...", Toast.LENGTH_SHORT).show();
+                        } else if (resultCode == 146) {
+//                            timeouthandler.removeCallbacks(timeoutrunnable);
+//                            timeouthandler.removeCallbacks(getststusrunnable);
+                            Toast.makeText(WiFiConnectingActivity.this, "连接路由器失败", Toast.LENGTH_SHORT).show();
+                        } else if (resultCode == 147) {
+                            timeouthandler.removeCallbacks(getststusrunnable);
+                            timeouthandler.removeCallbacks(timeoutrunnable);
+                            Toast.makeText(WiFiConnectingActivity.this, "请打开设备wifi", Toast.LENGTH_SHORT).show();
+                        } else if (resultCode == 148) {
+                            timeouthandler.removeCallbacks(getststusrunnable);
+                            timeouthandler.removeCallbacks(timeoutrunnable);
+                            Toast.makeText(WiFiConnectingActivity.this, "请检查路由器是否有网", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
             }
         }
     };
+
+
+    private void senfGetstatus() {
+        Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "get", "profile");
+        Map<String, String> body = new HashMap<String, String>();
+        Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
+        wifidata.put("header", header);
+        wifidata.put("body", body);
+        try {
+            JSONObject json = new JSONObject(wifidata);
+
+            ToPacket topacket = new ToPacket();
+            IDField.RetCode idfield = topacket.build(json);
+            Log.e("buildstatus", idfield.name());
+            byte[] b = topacket.getData();
+            Log.e("xxxxxxxxxxxxxx", "getstatus :" + System.currentTimeMillis());
+            mService.write(b, "data", topacket.getLength());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        timeouthandler.removeCallbacks(getststusrunnable);
+        timeouthandler.postDelayed(getststusrunnable, 10000);
+    }
 
     private boolean sendwifi = true;
 
@@ -310,11 +350,16 @@ public class WiFiConnectingActivity extends BaseActivity {
             IDField.RetCode idfield = topacket.build(json);
             Log.e("buildstatus", idfield.name());
             byte[] b = topacket.getData();
+            Log.e("xxxxxxxxxxxxxx", "sendDate :" + System.currentTimeMillis());
             mService.write(b, "data", topacket.getLength());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        timeouthandler.postDelayed(timeoutrunnable,90000);
+        timeouthandler.removeCallbacks(getststusrunnable);
+        timeouthandler.removeCallbacks(timeoutrunnable);
+
+        timeouthandler.postDelayed(getststusrunnable, 10000);
+        timeouthandler.postDelayed(timeoutrunnable, 90000);
     }
 
     Handler timeouthandler = new Handler();
@@ -323,6 +368,13 @@ public class WiFiConnectingActivity extends BaseActivity {
         @Override
         public void run() {
             setSendwifi();
+        }
+    };
+
+    Runnable getststusrunnable = new Runnable() {
+        @Override
+        public void run() {
+            senfGetstatus();
         }
     };
 
