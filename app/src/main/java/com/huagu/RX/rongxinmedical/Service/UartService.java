@@ -136,23 +136,24 @@ public class UartService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             byte[] txValue = characteristic.getValue();
-            broadcastUpdate(ACTION_DATA_Notification, characteristic);
-            datac(txValue);
+            IDField.RetCode retCode = SuperpositionDatac(txValue);
+            if (retCode == IDField.RetCode.RetOK){
+                broadcastUpdate(ACTION_DATA_Notification, reqjson_OK.toString());
+            }
         }
     };
 
-    public IDField.RetCode datac(byte[] txValue){
+    public ToJson reqjson_OK;
+
+    public IDField.RetCode SuperpositionDatac(byte[] txValue){
         try {
-            ToJson reqjson = new ToJson();
-
-            byte[] txValue1 = dataop(txValue);
-            IDField.RetCode retCode = reqjson.parse(txValue1, txValue1.length);
-
+            reqjson_OK = new ToJson();
+            byte[] txValue1 = JointData(txValue);
+            IDField.RetCode retCode = reqjson_OK.parse(txValue1, txValue1.length);
+            Log.e("xxxxxxxxxxxxx","xxxxxxxxx: "+retCode);
             if(retCode == IDField.RetCode.RetOK){
-                Log.e("xxxx",reqjson.toString());
-                Log.e("xxxxx","xxxxxxxxx: "+retCode);
-                data =null;
-                data1 =null;
+                Log.e("xxxxxxxxxxxxx", reqjson_OK.toString());
+                data =null; data1 =null;
                 return retCode;
             }else {
                 Log.e("xxxxx","xxxxxxxxx: "+retCode);
@@ -167,7 +168,7 @@ public class UartService extends Service {
 
     private byte[] data = null;
     private byte[] data1 = null;
-    public byte[] dataop(byte[] txValue) throws JSONException {
+    public byte[] JointData(byte[] txValue) throws JSONException {
         if (data == null){
             data = new byte[txValue.length];
             data = txValue;
@@ -201,21 +202,23 @@ public class UartService extends Service {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void broadcastUpdate(final String action,
-                                 final BluetoothGattCharacteristic characteristic) {
+    private void broadcastUpdate(final String action, final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
-
         // This is special handling for the Heart Rate Measurement profile.  Data parsing is
         // carried out as per profile specifications:
         // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
-        
         if (READ_CHAR_UUID.equals(characteristic.getUuid())) {
         	byte[] data=characteristic.getValue();
             //Log.d(TAG, String.format("Received TX: %d",data));
             intent.putExtra(EXTRA_DATA, data);
-        } else {
-        	
         }
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+
+    private void broadcastUpdate(String action,String str) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_DATA, str);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -429,12 +432,6 @@ public class UartService extends Service {
         }).start();
     }
 
-    private void broadcastUpdate(final String action,String act) {
-        final Intent intent = new Intent(action);
-        intent.putExtra("act", act);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-
 //    String reqstatus = "{\"header\":{\"msg_id\":14,\"dev_id\":\"EEEEEEEEEEEE\",\"action\":\"get\",\"module\":\"profile\"},\"body\":{}}";
 //    tojsonsend(reqstatus);
 
@@ -444,9 +441,7 @@ public class UartService extends Service {
      *
      * @return 
      */
-    public void enableTXNotification()
-    { 
-    	
+    public void enableTXNotification() {
     	if (mBluetoothGatt == null) {
     		showMessage("mBluetoothGatt null" + mBluetoothGatt);
     		broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
@@ -466,24 +461,20 @@ public class UartService extends Service {
         BluetoothGattDescriptor descriptor=bl.get(0);//descriptor = TxChar.getDescriptor(TX_CHAR_UUID);
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
         mBluetoothGatt.writeDescriptor(descriptor);
-        
-    	
     }
-    
-    public void writeRXCharacteristic(byte[] value)
-    {
-    
+
+    public void writeRXCharacteristic(byte[] value) {
     	/*
     	BluetoothGattService RxService = mBluetoothGatt.getService(RX_SERVICE_UUID);
     	showMessage("mBluetoothGatt null"+ mBluetoothGatt);
-    	
+
     	if (RxService == null) {
-    	
+
             showMessage("Rx service not found!");
             broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
             return;
         }
-    	
+
     	BluetoothGattCharacteristic RxChar = RxService.getCharacteristic(RX_CHAR_UUID);
         if (RxChar == null) {
             showMessage("Rx charateristic not found!");
@@ -492,9 +483,9 @@ public class UartService extends Service {
         }
         RxChar.setValue(value);
     	boolean status = mBluetoothGatt.writeCharacteristic(RxChar);
-    	
-        Log.d(TAG, "write TXchar - status=" + status);  
-        
+
+        Log.d(TAG, "write TXchar - status=" + status);
+
         char[] digital = "0123456789ABCDEF".toCharArray();
         StringBuffer sb = new StringBuffer("");
         for(byte d:value)

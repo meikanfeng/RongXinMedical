@@ -73,7 +73,7 @@
                     android:background="@color/colorWhite"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:text="patient002"
+                    android:text="patient003"
                     android:singleLine="true"/>
                 <!--   doctor-ww        patient002   -->
             </android.support.design.widget.TextInputLayout>
