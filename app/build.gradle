@@ -58,5 +58,5 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     compile 'cn.jiguang:jpush:2.1.8'
-    
+    compile files('libs/huahan_utils.jar')
 }

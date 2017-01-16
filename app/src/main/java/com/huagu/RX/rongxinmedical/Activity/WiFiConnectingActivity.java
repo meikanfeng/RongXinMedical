@@ -30,6 +30,7 @@ import com.huagu.RX.rongxinmedical.OperateData.ProtocolConverter.ToPacket;
 import com.huagu.RX.rongxinmedical.R;
 import com.huagu.RX.rongxinmedical.Service.UartService;
 import com.huagu.RX.rongxinmedical.Utils.BluetoothManager;
+import com.huagu.RX.rongxinmedical.Utils.StringUitls;
 import com.huagu.RX.rongxinmedical.Utils.WriteDataUtils;
 
 import org.json.JSONException;
@@ -71,6 +72,10 @@ public class WiFiConnectingActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mService != null){
+                    mService.close();
+                }
+                Toast.makeText(WiFiConnectingActivity.this,"断开服务",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -127,7 +132,8 @@ public class WiFiConnectingActivity extends BaseActivity {
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             if (!isScan) return;
-            if ("resvent".equals(result.getDevice().getName())) {
+            if (!StringUitls.isEmtpy(result.getDevice().getName()) && "resvent".equals(result.getDevice().getName())) {
+                Log.e("TAG","发现名称");
                 WiFiConnectingActivity.this.device = result.getDevice();
                 connBluetooth();
                 isScan = false;
@@ -246,7 +252,12 @@ public class WiFiConnectingActivity extends BaseActivity {
                 Toast.makeText(WiFiConnectingActivity.this, "发现服务", Toast.LENGTH_LONG).show();
                 csa.notifyDataSetChanged();
                 upload_data.setSelected(true);
-                mService.enableTXNotification();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mService.enableTXNotification();
+                    }
+                },1000);
                 sendData();
             }
 
@@ -276,6 +287,7 @@ public class WiFiConnectingActivity extends BaseActivity {
                 Log.e("xxxxxxxxxxxxx","  ffffff: "+ txValue);
                 try {
                     JSONObject json = new JSONObject(txValue);
+                    Log.i("TAG",json.toString());
                     if (sendwifi) {
                         sendwifi = false;
                         setSendwifi();
@@ -314,6 +326,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
 
     private void senfGetstatus() {
+        Log.i("TAG","发送WiFi名称和密码");
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "get", "profile");
         Map<String, String> body = new HashMap<String, String>();
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
@@ -338,6 +351,8 @@ public class WiFiConnectingActivity extends BaseActivity {
     private boolean sendwifi = true;
 
     public void setSendwifi() {
+        Log.e("wifi名称",wifiname);
+        Log.e("wifi密码",wifipassword);
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "set", "profile");
         Map<String, String> body = WriteDataUtils.getInstance().getBody(wifiname, "wpa", wifipassword);
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();

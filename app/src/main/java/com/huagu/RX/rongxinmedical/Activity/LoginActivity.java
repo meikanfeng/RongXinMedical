@@ -120,9 +120,10 @@ public class LoginActivity extends BaseActivity implements RequestListener {
         this.findViewById(R.id.registeruser).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });
+
     }
 
     @Override

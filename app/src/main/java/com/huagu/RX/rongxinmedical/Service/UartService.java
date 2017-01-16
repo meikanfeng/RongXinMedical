@@ -77,14 +77,15 @@ public class UartService extends Service {
     public final static String DEVICE_WRITE_FAIL ="com.huagu.fmk.DEVICE_WRITE_FAIL";
     public final static String IS_SUCCESS = "IS_SUCCESS";
 
-
     /*医疗*/
     public static final UUID SERVICE_UUID = UUID.fromString("1B7E8251-2877-41C3-B46E-CF057C562023");
     public static final UUID READ_CHAR_UUID = UUID.fromString("8AC32D3F-5CB9-4D44-BEC2-EE689169F626");//read notify indicate(读，通知，..)
     public static final UUID WRITE_CHAR_UUID = UUID.fromString("5E9BF2A8-F93F-4481-A67E-3B2F4A07891A");//read write （读，写）
 
     public void setdiscoverServices(){
-        Log.i(TAG, "Attempting to start service discovery:" + mBluetoothGatt.discoverServices());
+        if(mBluetoothGatt != null){
+            Log.i(TAG, "Attempting to start service discovery:" + mBluetoothGatt.discoverServices());
+        }
     }
 
     /*
@@ -99,13 +100,15 @@ public class UartService extends Service {
             String intentAction;
             if (status == 133)close();
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                Log.e("TAG","服务连接成功");
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
                 broadcastUpdate(intentAction);
                 // Attempts to discover services after successful connection.
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                Log.e("TAG","断开服务");
                 if (mBluetoothGatt != null)
-                    mBluetoothGatt.disconnect();
+//                    mBluetoothGatt.disconnect();
                 close();
                 mBluetoothGatt = null;
                 intentAction = ACTION_GATT_DISCONNECTED;
@@ -118,6 +121,7 @@ public class UartService extends Service {
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            Log.e("TAG","发现服务");
             if (status == BluetoothGatt.GATT_SUCCESS) {
             	Log.w(TAG, "mBluetoothGatt = " + mBluetoothGatt);
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
@@ -128,6 +132,7 @@ public class UartService extends Service {
 
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            Log.e("TAG","获取数据成功");
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
@@ -135,6 +140,7 @@ public class UartService extends Service {
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            Log.e("TAG","获取数据成功");
             byte[] txValue = characteristic.getValue();
             IDField.RetCode retCode = SuperpositionDatac(txValue);
             if (retCode == IDField.RetCode.RetOK){
@@ -286,6 +292,7 @@ public class UartService extends Service {
      *         callback.
      */
     public boolean connect(final String address) {
+        Log.e("TAG","开始找服务");
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
             return false;
@@ -332,6 +339,7 @@ public class UartService extends Service {
         }
         Log.w(TAG, "mBluetoothGatt closed");
         mBluetoothDeviceAddress = null;
+        mBluetoothGatt.disconnect();
         mBluetoothGatt.close();
         mBluetoothGatt = null;
     }
@@ -424,7 +432,9 @@ public class UartService extends Service {
                     }
                     if (status){
                         broadcastUpdate(DEVICE_WRITE_SUCCESS,type);
+                        Log.e("TAG","wifi发送成功");
                     }else{
+                        Log.e("TAG","wifi发送失败");
                         broadcastUpdate(DEVICE_WRITE_FAIL,type);
                     }
                 }
@@ -442,6 +452,7 @@ public class UartService extends Service {
      * @return 
      */
     public void enableTXNotification() {
+        Log.e("TAG","注册广播");
     	if (mBluetoothGatt == null) {
     		showMessage("mBluetoothGatt null" + mBluetoothGatt);
     		broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
