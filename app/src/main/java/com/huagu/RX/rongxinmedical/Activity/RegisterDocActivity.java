@@ -1,7 +1,9 @@
 package com.huagu.RX.rongxinmedical.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import com.huagu.RX.rongxinmedical.Entity.GoodsNameAndId;
 import com.huagu.RX.rongxinmedical.Interface.RequestListener;
 import com.huagu.RX.rongxinmedical.R;
 import com.huagu.RX.rongxinmedical.Utils.HttpRequest;
+import com.huagu.RX.rongxinmedical.Utils.StringUitls;
 import com.huagu.RX.rongxinmedical.View.WindowsUtils;
 
 import org.json.JSONArray;
@@ -75,16 +78,167 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
         register_submit.setOnClickListener(this);
         register_cancle.setOnClickListener(this);
 
-        getCountryList();
     }
-    public void getCountryList(){
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.organization_type://组织类型
+                WindowsUtils.showStringListPopupWindow(view, typelist, new WindowsUtils.OnStringItemClickListener() {
+                    @Override
+                    public void onStringItemClick(int position) {
+                        organization_type.setText(typelist.get(position).getGc_name());
+
+                    }
+                });
+                break;
+            case R.id.country://组织类型
+                if(countrylist!=null&&countrylist.size()>0){
+                  WindowsUtils.showStringListPopupWindow(view, countrylist, new WindowsUtils.OnStringItemClickListener() {
+                      @Override
+                      public void onStringItemClick(int position) {
+                            country.setText(countrylist.get(position).getGc_name());
+                      }
+                  });
+                }else {
+                    getCountryList();
+                }
+
+                break;
+            case R.id.register_submit://提交
+                String name = user_name.getText().toString().trim();
+                String passWord = user_password.getText().toString().trim();
+                String surePassWord = confirm_password.getText().toString().trim();
+                String ming = first_name.getText().toString().trim();
+                String xing = last_name.getText().toString().trim();
+                String company = institution.getText().toString().trim();
+                String organization = organization_type.getText().toString().trim();
+                String title = job_title.getText().toString().trim();
+                String email = email_address.getText().toString().trim();
+                String phone = phone_num.getText().toString().trim();
+                String city = country.getText().toString();
+
+                if(StringUitls.isEmtpy(name)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_name,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(passWord)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_password,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(passWord.length() < 6 ){
+                    Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(passWord.length() > 15 ){
+                    Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(StringUitls.isEmtpy(surePassWord)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_password,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(surePassWord.length() < 6 ){
+                    Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(surePassWord.length() > 15 ){
+                    Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(!surePassWord.equals(passWord)) {
+                    Toast.makeText(RegisterDocActivity.this,R.string.password_err,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(StringUitls.isEmtpy(ming)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_ming,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(xing)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_xing,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(company)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.organization_err,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(title)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.position_err,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(email)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_email,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!StringUitls.isEmail(email)){
+                    Toast.makeText(RegisterDocActivity.this,R.string.forget_email_err,Toast.LENGTH_LONG).show();
+                    return ;
+                }
+                if(StringUitls.isEmtpy(phone)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_phone,Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(StringUitls.isEmtpy(city)){
+                    Toast.makeText(RegisterDocActivity.this, R.string.forget_city,Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                HashMap<String,String> hash = new HashMap<String,String>();
+                hash.put("USERNAME", name);
+                hash.put("PASSWORD", passWord);
+                hash.put("repassword", surePassWord);
+                hash.put("FIRST_NAME", ming);
+                hash.put("LAST_NAME", xing);
+                hash.put("COMPANY", company);
+                hash.put("INSTITUTUIN_ID", organization);
+                hash.put("JOBTITLE", title);
+                hash.put("EMAIL", email);
+                hash.put("PHONE", phone);
+                hash.put("COUNTRY",city);
+                HttpRequest.getInstance().Request("doctor/register",hash,RegisterDocActivity.this);
+                break;
+            case R.id.register_cancle:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void Success(String method, JSONObject result) throws JSONException {
+        Log.i("JSONObject",result.toString());
+        if (!StringUitls.isEmtpy(result.toString())) {
+            if(result.getString("data").equals("regiser success")){
+                Toast.makeText(RegisterDocActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterDocActivity.this,LoginActivity.class);
+                startActivity(intent);
+                RegisterDocActivity.this.finish();
+            }else {
+                Toast.makeText(RegisterDocActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(RegisterDocActivity.this,R.string.hint_err,Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void Failure(String str, String method, int errorCode) {
+        Toast.makeText(RegisterDocActivity.this,str,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Error(String str, String method, Throwable ex) {
+        Toast.makeText(RegisterDocActivity.this,str,Toast.LENGTH_SHORT).show();
+    }
+
+    private void getCountryList(){
         typelist =new ArrayList<>();
         typelist.add(new GoodsNameAndId("Hospital","0"));
         typelist.add(new GoodsNameAndId("Sleep Lab","1"));
         typelist.add(new GoodsNameAndId("Other","2"));
 
 
-        String Country_URL =" http://192.168.1.115:8080/resvent/area/list?country=1";
+        String Country_URL ="http://192.168.1.115:8080/resvent/area/list?country=1";
         RequestParams rp = new RequestParams(Country_URL);
         x.http().get(rp, new Callback.CacheCallback<JSONObject>() {
             @Override
@@ -122,68 +276,5 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
                 return false;
             }
         });
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.organization_type:
-                WindowsUtils.showStringListPopupWindow(view, typelist, new WindowsUtils.OnStringItemClickListener() {
-                    @Override
-                    public void onStringItemClick(int position) {
-                        organization_type.setText(typelist.get(position).getGc_name());
-
-                    }
-                });
-                break;
-            case R.id.country://组织类型
-                if(countrylist!=null&&countrylist.size()>0){
-                  WindowsUtils.showStringListPopupWindow(view, countrylist, new WindowsUtils.OnStringItemClickListener() {
-                      @Override
-                      public void onStringItemClick(int position) {
-                            country.setText(countrylist.get(position).getGc_name());
-                      }
-                  });
-                }else {
-                    getCountryList();
-                }
-
-                break;
-            case R.id.register_submit://
-                HashMap<String,String> hash = new HashMap<String,String>();
-                hash.put("USERNAME", user_name.getText().toString());
-                hash.put("PASSWORD", user_password.getText().toString());
-                hash.put("repassword", confirm_password.getText().toString());
-                hash.put("FIRST_NAME", first_name.getText().toString());
-                hash.put("LAST_NAME", last_name.getText().toString());
-                hash.put("COMPANY", institution.getText().toString());
-                hash.put("INSTITUTUIN_ID", organization_type.getText().toString());
-                hash.put("JOBTITLE", job_title.getText().toString());
-                hash.put("EMAIL", email_address.getText().toString());
-                hash.put("PHONE", phone_num.getText().toString());
-                hash.put("COUNTRY",country.getText().toString());
-                HttpRequest.getInstance().Request("doctor/register",hash,RegisterDocActivity.this);
-                break;
-            case R.id.register_cancle:
-                finish();
-                break;
-        }
-    }
-
-    @Override
-    public void Success(String method, JSONObject result) throws JSONException {
-        Toast.makeText(context,"注册成功",Toast.LENGTH_LONG).show();
-        finish();
-    }
-
-    @Override
-    public void Failure(String str, String method, int errorCode) {
-
-    }
-
-    @Override
-    public void Error(String str, String method, Throwable ex) {
-
     }
 }

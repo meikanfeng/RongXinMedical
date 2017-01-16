@@ -206,14 +206,42 @@
     <string name="no_vericode_Tips">Please enter validation code</string>
     <string name="vericode_error_Tips">Verification code error</string>
     <string name="phone_error_Tips">Cell phone number wrong</string>
-    <string name="password">password</string>
-    <string name="confirm_password">confirm password</string>
+    <string name="password">password*</string>
+    <string name="confirm_password">confirm password*</string>
     <string name="submit">Submit</string>
 
+    <!--结果-->
+    <string name="modify_success" >Submit successfully</string>
+    <string name="modify_hint" >We just emailed you,please check later.</string>
+    <string name="modify_title" >Forget Password</string>
 
+    <!--提示-->
+    <string name="forget_name">The name cannot be empty</string>
+    <string name="forget_passWord">Password cannot be empty</string>
+    <string name="forget_ming">First cannot be empty</string>
+    <string name="forget_xing">Last name cannot be empty</string>
+    <string name="forget_gender">Gender cannot be empty</string>
+    <string name="forget_dateBirth">Date of birth can not be empty</string>
+    <string name="forget_email">Email can not be empty</string>
+    <string name="forget_phone">Phone can not be empty</string>
+    <string name="forget_city">City can not be empty</string>
+    <string name="forget_deviceModel">Device model can not be empty</string>
+    <string name="forget_num">No. can not be empty</string>
+    <string name="forget_num_err">Number fill in error</string>
+    <string name="forget_passWord_err">Password too short</string>
+    <string name="forget_passWord_long">The password is too long</string>
+    <string name="forget_phone_err">Phone error</string>
+    <string name="forget_email_err">Email error</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="password_err">Two password input inconsistent!</string>
+    <string name="hint_err">Failed to get the data</string>
+    <string name="hint_succss">Registered successfully</string>
+    <string name="organization_err">Tissue types cannot be empty</string>
+    <string name="position_err">Post cannot be empty</string>
+    <string name="name_short">Name is too long</string>
+    <string name="name_long">Name is too long</string>
 
     <string-array name="week">
         <item>Sunday</item>

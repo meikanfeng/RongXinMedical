@@ -197,8 +197,8 @@
 
     <!--找回密码-->
     <string name="find_password_hint">输入您的用户名称和电子邮件地址,我们将会发邮件给你的链接重置您的密码。</string>
-    <string name="user_name">姓名</string>
-    <string name="email_address">邮箱</string>
+    <string name="user_name">姓名*</string>
+    <string name="email_address">邮箱*</string>
     <string name="find_password">找回密码</string>
     <string name="phone_num">请输入手机号码</string>
     <string name="veification_code">请输入验证码</string>
@@ -207,13 +207,40 @@
     <string name="no_vericode_Tips">请输入验证码</string>
     <string name="vericode_error_Tips">验证码错误</string>
     <string name="phone_error_Tips">手机号码格式错误</string>
-    <string name="password">密码</string>
-    <string name="confirm_password">再输入一次密码</string>
+    <string name="password">密码*</string>
+    <string name="confirm_password">再输入一次密码*</string>
     <string name="submit">提交</string>
 
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <!--结果-->
+    <string name="modify_success" >提交成功</string>
+    <string name="modify_hint" >我们就发邮件给你,请检查。</string>
+    <string name="modify_title" >忘记密码</string>
+
+    <!--提示-->
+    <string name="forget_name">姓名不能为空</string>
+    <string name="forget_passWord">密码不能为空</string>
+    <string name="forget_ming">名字不能为空</string>
+    <string name="forget_xing">姓不能为空</string>
+    <string name="forget_gender">性别不能为空</string>
+    <string name="forget_dateBirth">出生日期不能为空</string>
+    <string name="forget_email">Email不能为空</string>
+    <string name="forget_phone">电话不能为空</string>
+    <string name="forget_city">城市不能为空</string>
+    <string name="forget_deviceModel">器件模式不能为空</string>
+    <string name="forget_num">编号不能为空</string>
+    <string name="forget_num_err">编号填写错误</string>
+    <string name="forget_passWord_err">密码过短</string>
+    <string name="forget_passWord_long">密码过长</string>
+    <string name="forget_phone_err">电话错误</string>
+    <string name="forget_email_err">邮箱错误</string>
+    <string name="permission_rationale">"需要提供电子邮件联系人权限完成"</string>
+    <string name="password_err">两次密码输入不一致！</string>
+    <string name="hint_err">获取数据失败</string>
+    <string name="hint_succss">Registered successfully</string>
+    <string name="organization_err">组织类型不能为空</string>
+    <string name="position_err">职位不能为空</string>
+    <string name="name_short">名字过短</string>
+    <string name="name_long">名字过长</string>
 
     <string-array name="week">
         <item>星期天</item>

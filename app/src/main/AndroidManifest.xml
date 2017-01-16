@@ -105,6 +105,7 @@
         <activity android:name=".Activity.RegisterActivity"/>
         <activity android:name=".Activity.RegisterDocActivity"/>
         <activity android:name=".Activity.RegisterPatientActivity"/>
+        <activity android:name=".Activity.ModifyActivity"/>
     </application>
 
 </manifest>
