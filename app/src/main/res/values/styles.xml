@@ -30,4 +30,23 @@
         <attr name="mm_rtlEnabled" format="boolean"/>
     </declare-styleable>
 
+    <style name="diaogstyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="RadioCheckboxTheme" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+    <style name="anim_window_select">
+        <item name="android:windowEnterAnimation">@anim/window_select_in</item>
+        <item name="android:windowExitAnimation">@anim/window_select_out</item>
+    </style>
+
 </resources>

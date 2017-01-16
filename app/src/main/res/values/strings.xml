@@ -174,7 +174,30 @@
     <string name="Resvent_Medical">Resvent Medical %s</string>
     <string name="copyright">Copyright©2016 Resvent Medical Technology CO.,Ltd.</string>
 
+    <!--用户注册-->
+    <string name="Registration">Registration</string>
+    <string name="create">Create a new account</string>
+    <string name="select_type">Please select your account type:</string>
+    <string name="doctor">I\'m a doctor</string>
+    <string name="patient">I\'m a patient</string>
+    <string name="please_input_info">Please input your information</string>
+    <string name="password_notiry">6-15characters</string>
+    <string name="first_name">First Name*</string>
+    <string name="last_name">Last Name*</string>
+    <string name="institution">Institution*</string>
+    <string name="organization_type">Organization Type*</string>
+    <string name="job_title">Job Title*</string>
+    <string name="phone_number">Phone Number*</string>
+    <string name="country">Country*</string>
+    <string name="gender">Gender*</string>
+    <string name="date_birth">Date of birth*</string>
+    <string name="device_model">Device Model*</string>
+    <string name="serial_num">Serial Number*</string>
+
     <!--找回密码-->
+    <string name="find_password_hint">Enter your user name and email address and we\'ll email you a link to reset your password.</string>
+    <string name="user_name">User Name*</string>
+    <string name="email_address">Email_address*</string>
     <string name="find_password">Find Password</string>
     <string name="phone_num">You phone number</string>
     <string name="veification_code">Veification Code</string>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10"
+        android:text="@string/create"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10"
+        android:textSize="@dimen/dimen_15"
+        android:textColor="@color/gray_black"
+        android:text="@string/select_type"/>
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/radio_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen_10"
+            style="@style/RadioCheckboxTheme"
+            android:text="@string/patient"/>
+        <RadioButton
+            android:id="@+id/radio_doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:paddingLeft="@dimen/dimen_10"
+            style="@style/RadioCheckboxTheme"
+            android:text="@string/doctor"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/register_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:gravity="center"
+        android:padding="@dimen/dimen_10"
+        android:layout_marginLeft="@dimen/margin_50"
+        android:layout_marginRight="@dimen/margin_50"
+        android:layout_marginTop="@dimen/margin_75"
+        android:background="@drawable/button_themecolor"
+        android:clickable="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textsize_18"/>
+    <TextView
+        android:id="@+id/register_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:padding="@dimen/dimen_10"
+        android:layout_marginLeft="@dimen/margin_50"
+        android:layout_marginRight="@dimen/margin_50"
+        android:layout_marginTop="@dimen/margin_25"
+        android:background="@drawable/button_graycolor"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textsize_18"/>
+
+</LinearLayout>

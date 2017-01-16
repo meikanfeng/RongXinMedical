@@ -13,7 +13,6 @@
     <string name="error_field_required">error_field_required</string>
     <string name="register_user">register_user</string>
     <string name="forget_password">forget_password</string>
-
     <string name="login_tips">Login Success</string>
 
     <!--首页数据-->
@@ -42,8 +41,8 @@
 
     <!--病人列表-->
     <string name="patientlist_ageandsex" formatted="false">%2s/%1s</string>
-    <string name="patientlist_id" formatted="false">ID:%s</string>
-    <string name="patientlist_update" formatted="false">%s</string>
+    <string name="patientlist_id" formatted="false">ID:%1s</string>
+    <string name="patientlist_update" formatted="false">%1s</string>
     <string name="search">search</string>
     <string name="PatientList">Patient List</string>
     <string name="search_content">Please input search content</string>
@@ -109,7 +108,8 @@
     <string name="ble_not_supported">Does not support bluetooth 4.0</string>
     <string name="open_ble">Open the bluetooth</string>
     <string name="is_open_ble">Whether to open the bluetooth</string>
-    <string name="Opening_the_bluetooth">Openint the bluetooth</string>
+    <string name="Opening_the_bluetooth">Opening the bluetooth</string>
+
 
     <!--WiFi设置-->
     <string name="wifisettingtips1">1.Please start up your device.</string>
@@ -174,7 +174,30 @@
     <string name="Resvent_Medical">Resvent Medical %s</string>
     <string name="copyright">Copyright©2016 Resvent Medical Technology CO.,Ltd.</string>
 
+    <!--用户注册-->
+    <string name="Registration">Registration</string>
+    <string name="create">Create a new account</string>
+    <string name="select_type">Please select your account type:</string>
+    <string name="doctor">I\'m a doctor</string>
+    <string name="patient">I\'m a patient</string>
+    <string name="please_input_info">Please input your information</string>
+    <string name="password_notiry">6-15characters</string>
+    <string name="first_name">First Name*</string>
+    <string name="last_name">Last Name*</string>
+    <string name="institution">Institution*</string>
+    <string name="organization_type">Organization Type*</string>
+    <string name="job_title">Job Title*</string>
+    <string name="phone_number">Phone Number*</string>
+    <string name="country">Country*</string>
+    <string name="gender">Gender*</string>
+    <string name="date_birth">Date of birth*</string>
+    <string name="device_model">Device Model*</string>
+    <string name="serial_num">Serial Number*</string>
+
     <!--找回密码-->
+    <string name="find_password_hint">Enter your user name and email address and we\'ll email you a link to reset your password.</string>
+    <string name="user_name">User Name*</string>
+    <string name="email_address">Email_address*</string>
     <string name="find_password">Find Password</string>
     <string name="phone_num">You phone number</string>
     <string name="veification_code">Veification Code</string>
@@ -182,7 +205,7 @@
     <string name="no_phone_Tips">Please enter the phone number</string>
     <string name="no_vericode_Tips">Please enter validation code</string>
     <string name="vericode_error_Tips">Verification code error</string>
-    <string name="phone_error_Tips">Phone number format error</string>
+    <string name="phone_error_Tips">Cell phone number wrong</string>
     <string name="password">password</string>
     <string name="confirm_password">confirm password</string>
     <string name="submit">Submit</string>

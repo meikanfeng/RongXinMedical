@@ -38,7 +38,7 @@ public class DialogShows extends Dialog implements DialogShowsOkLinstener, View.
             ds.dismiss();
         }
         contexts = context;
-        ds = new DialogShows(context);
+        ds = new DialogShows(context,R.style.diaogstyle);
         return ds;
     }
 
