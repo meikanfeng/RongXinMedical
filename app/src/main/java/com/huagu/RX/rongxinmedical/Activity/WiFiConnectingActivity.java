@@ -75,6 +75,8 @@ public class WiFiConnectingActivity extends BaseActivity {
                 if (mService != null){
                     mService.close();
                 }
+                timeouthandler.removeCallbacks(getststusrunnable);
+                timeouthandler.removeCallbacks(timeoutrunnable);
                 Toast.makeText(WiFiConnectingActivity.this,"断开服务",Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -326,7 +328,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
 
     private void senfGetstatus() {
-        Log.i("TAG","发送WiFi名称和密码");
+        Log.i("TAG","获取WiFi发送状态");
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "get", "profile");
         Map<String, String> body = new HashMap<String, String>();
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
@@ -351,6 +353,7 @@ public class WiFiConnectingActivity extends BaseActivity {
     private boolean sendwifi = true;
 
     public void setSendwifi() {
+        Log.i("TAG","发送WiFi名称和密码");
         Log.e("wifi名称",wifiname);
         Log.e("wifi密码",wifipassword);
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "set", "profile");
@@ -360,7 +363,7 @@ public class WiFiConnectingActivity extends BaseActivity {
         wifidata.put("body", body);
         try {
             JSONObject json = new JSONObject(wifidata);
-
+            Log.i("TAG",json.toString());
             ToPacket topacket = new ToPacket();
             IDField.RetCode idfield = topacket.build(json);
             Log.e("buildstatus", idfield.name());

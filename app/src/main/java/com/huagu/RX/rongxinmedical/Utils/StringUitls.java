@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringUitls {
     public static  boolean isEmtpy(String str){
-        if (str.trim() == null || str.trim().length() == 0){
+        if (str == null || str.length() == 0){
             return true;
         }else{
             return false;
