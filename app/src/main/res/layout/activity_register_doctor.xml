@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8"
+                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:layout_marginRight="@dimen/dimen_35"
                 android:singleLine="true"
                 android:layout_marginLeft="@dimen/dimen_35"
@@ -68,6 +69,7 @@
                 android:background="@drawable/edit_dark_bg"
                 android:textSize="@dimen/textsize_16" />
             <EditText
+                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:id="@+id/first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,6 +84,7 @@
                 android:textSize="@dimen/textsize_16" />
 
             <EditText
+                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:id="@+id/last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

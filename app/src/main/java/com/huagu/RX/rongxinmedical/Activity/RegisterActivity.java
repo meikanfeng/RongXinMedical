@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huagu.RX.rongxinmedical.R;
 
@@ -65,13 +66,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.register_next:
-
                 if(((RadioButton)findViewById(R.id.radio_patient)).isChecked()){ //患者
                     startActivity(new Intent(RegisterActivity.this,RegisterPatientActivity.class));
                 }else if(((RadioButton)findViewById(R.id.radio_doctor)).isChecked()){//医生
                     startActivity(new Intent(RegisterActivity.this,RegisterDocActivity.class));
                 }
-
                 break;
             case R.id.register_cancle:
                 finish();

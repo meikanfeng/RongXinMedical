@@ -2,17 +2,21 @@ package com.huagu.RX.rongxinmedical.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huagu.RX.rongxinmedical.Entity.GoodsNameAndId;
 import com.huagu.RX.rongxinmedical.Interface.RequestListener;
 import com.huagu.RX.rongxinmedical.R;
 import com.huagu.RX.rongxinmedical.Utils.HttpRequest;
 import com.huagu.RX.rongxinmedical.Utils.StringUitls;
+import com.huagu.RX.rongxinmedical.Utils.ToastUitls;
 import com.huagu.RX.rongxinmedical.View.WindowsUtils;
 
 import org.json.JSONArray;
@@ -209,20 +213,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
                 }
                 break;
             case R.id.register_submit://提交
-                HashMap<String,String> hash = new HashMap<String,String>();
-                hash.put("USERNAME", user_name.getText().toString());
-                hash.put("PASSWORD", user_password.getText().toString());
-                hash.put("repassword", confirm_password.getText().toString());
-                hash.put("FIRST_NAME", first_name.getText().toString());
-                hash.put("LAST_NAME", last_name.getText().toString());
-                hash.put("SEX", gender.getText().toString());//不知道他们是要ID还是NAME，ID的话改成 sexid;
-                hash.put("BIRTH", date_birth.getText().toString());
-                hash.put("EMAIL", email_address.getText().toString());
-                hash.put("PHONE", phone_num.getText().toString());
-                hash.put("COUNTRY",country.getText().toString());
-                hash.put("DeviceType", device_model.getText().toString());
-                hash.put("DEVICE_ID", serial_num.getText().toString());
-                HttpRequest.getInstance().Request("patient/register",hash,RegisterPatientActivity.this);
+                submitMethod();
                 break;
             case R.id.register_cancle:
                 finish();
@@ -230,21 +221,162 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
         }
     }
 
+    private void submitMethod() {
+        String name  = user_name.getText().toString().trim();
+        String firstName = first_name.getText().toString().trim();
+        String userPassword = user_password.getText().toString().trim();
+        String confirmPassword = confirm_password.getText().toString().trim();
+        String lastName = last_name.getText().toString().trim();
+        String sex = gender.getText().toString().trim();
+        String dateBirth = date_birth.getText().toString().trim();
+        String email = email_address.getText().toString().trim();
+        String phone = phone_num.getText().toString().trim();
+        String city = country.getText().toString().trim();
+        String deviceModel = device_model.getText().toString().trim();
+        String serialNum = serial_num.getText().toString().trim();
+
+        if(StringUitls.isEmtpy(name)){
+            Toast.makeText(RegisterPatientActivity.this, R.string.forget_name,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(name.length() < 4 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.name_short,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(name.length() > 15 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.name_long,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(firstName)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_ming,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(userPassword)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_password,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(userPassword.length() < 6 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(userPassword.length() > 15 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
+            return ;
+        }
+
+        if(StringUitls.isEmtpy(confirmPassword)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_password,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(confirmPassword.length() < 6 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(confirmPassword.length() > 15 ){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(!confirmPassword.equals(userPassword)) {
+            Toast.makeText(RegisterPatientActivity.this,R.string.password_err,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(lastName)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_xing,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(sex)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_gender,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(dateBirth)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_dateBirth,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(email)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_email,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(!StringUitls.isEmail(email)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_email_err,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(phone)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_phone,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(!(phone.length() >=6 && phone.length() <=15)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_phone,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(city)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_city,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(deviceModel)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_deviceModel,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(StringUitls.isEmtpy(serialNum)){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_num,Toast.LENGTH_LONG).show();
+            return ;
+        }
+        if(!serialNum.startsWith("GA")){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_num_err,Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(!serialNum.contains("-")){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_num_err,Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(serialNum.length() != 11){
+            Toast.makeText(RegisterPatientActivity.this,R.string.forget_num_err,Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        HashMap<String,String> hash = new HashMap<String,String>();
+        hash.put("USERNAME", name);
+        hash.put("PASSWORD", userPassword);
+        hash.put("repassword", confirmPassword);
+        hash.put("FIRST_NAME", firstName);
+        hash.put("LAST_NAME", lastName);
+        hash.put("SEX", sex);//不知道他们是要ID还是NAME，ID的话改成 sexid;
+        hash.put("BIRTH", dateBirth);
+        hash.put("EMAIL", email);
+        hash.put("PHONE", phone);
+        hash.put("COUNTRY",city);
+        hash.put("DeviceType", deviceModel);
+        hash.put("DEVICE_ID", serialNum);
+        HttpRequest.getInstance().Request("patient/register",hash,RegisterPatientActivity.this);
+    }
 
 
     @Override
     public void Success(String method, JSONObject result) throws JSONException {
+        Log.i("JSONObject",result.toString());
+        if (!StringUitls.isEmtpy(result.toString())) {
+            if(result.getString("data").equals("regiser success")){
+                Toast.makeText(RegisterPatientActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterPatientActivity.this,LoginActivity.class);
+                startActivity(intent);
+                RegisterPatientActivity.this.finish();
+            }else {
+                Toast.makeText(RegisterPatientActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
+            }
 
+        }else {
+            Toast.makeText(RegisterPatientActivity.this,R.string.hint_err,Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void Failure(String str, String method, int errorCode) {
-
+            Toast.makeText(RegisterPatientActivity.this,str,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void Error(String str, String method, Throwable ex) {
-
+        Toast.makeText(RegisterPatientActivity.this,str,Toast.LENGTH_SHORT).show();
     }
     /*
     日期选择器

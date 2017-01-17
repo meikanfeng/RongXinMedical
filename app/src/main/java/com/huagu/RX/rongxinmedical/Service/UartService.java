@@ -247,7 +247,8 @@ public class UartService extends Service {
         // After using a given device, you should make sure that BluetoothGatt.close() is called
         // such that resources are cleaned up properly.  In this particular example, close() is
         // invoked when the UI is disconnected from the Service.
-        close();
+        if (mBluetoothGatt != null)
+            close();
         return super.onUnbind(intent);
     }
 
@@ -334,14 +335,20 @@ public class UartService extends Service {
      * released properly.
      */
     public void close() {
-        if (mBluetoothGatt == null) {
-            return;
-        }
-        Log.w(TAG, "mBluetoothGatt closed");
-        mBluetoothDeviceAddress = null;
-        mBluetoothGatt.disconnect();
-        mBluetoothGatt.close();
-        mBluetoothGatt = null;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mBluetoothGatt == null) {
+                    return;
+                }
+                Log.w(TAG, "mBluetoothGatt closed");
+                mBluetoothDeviceAddress = null;
+                mBluetoothGatt.disconnect();
+                mBluetoothGatt.close();
+                mBluetoothGatt = null;
+            }
+        },1000);
+
     }
 
     /**
