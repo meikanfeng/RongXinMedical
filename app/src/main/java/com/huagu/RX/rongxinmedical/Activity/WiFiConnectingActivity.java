@@ -18,6 +18,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -72,13 +73,7 @@ public class WiFiConnectingActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mService != null){
-                    mService.close();
-                }
-                timeouthandler.removeCallbacks(getststusrunnable);
-                timeouthandler.removeCallbacks(timeoutrunnable);
-                Toast.makeText(WiFiConnectingActivity.this,"断开服务",Toast.LENGTH_SHORT).show();
-                finish();
+                exitActivity();
             }
         });
 
@@ -87,6 +82,21 @@ public class WiFiConnectingActivity extends BaseActivity {
         status_list.setAdapter(csa);
 
         upload_data = (TextView) this.findViewById(R.id.upload_data);
+    }
+
+    private void exitActivity() {
+        if (mService != null){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mService.close();
+                }
+            },1500);
+        }
+        timeouthandler.removeCallbacks(getststusrunnable);
+        timeouthandler.removeCallbacks(timeoutrunnable);
+        Toast.makeText(WiFiConnectingActivity.this,"断开服务",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 
@@ -292,7 +302,8 @@ public class WiFiConnectingActivity extends BaseActivity {
                     Log.i("TAG",json.toString());
                     if (sendwifi) {
                         sendwifi = false;
-                        setSendwifi();
+                        if (!StringUitls.isEmtpy(device.getAddress()))
+                            setSendwifi();
                         return;
                     }
                     if ("profile".equals(json.getJSONObject("header").getString("module"))){
@@ -396,4 +407,12 @@ public class WiFiConnectingActivity extends BaseActivity {
         }
     };
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitActivity();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
