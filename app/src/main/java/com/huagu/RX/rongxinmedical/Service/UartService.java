@@ -39,10 +39,12 @@ import com.huagu.RX.rongxinmedical.OperateData.ProtocolConverter.IDField;
 import com.huagu.RX.rongxinmedical.OperateData.ProtocolConverter.ToJson;
 import com.huagu.RX.rongxinmedical.OperateData.ProtocolConverter.ToPacket;
 import com.huagu.RX.rongxinmedical.OperateData.spring.Hex;
+import com.huagu.RX.rongxinmedical.Utils.StringUitls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -94,7 +96,19 @@ public class UartService extends Service {
     */
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
+    /**
+     * 连接流程
+     * 1.onConnectionStateChange---STATE_CONNECTED
+     * 2.成功：mBluetoothGatt.discoverServices()
+     * 3.onServicesDiscovered
+     * 4.成功：注册广播enableTXNotification
+     * 5.wirte
+     * 6.onCharacteristicChanged
+     * 7.成功：close
+     */
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
+
+        //获取连接状态方法，BLE设备连接上或断开时，会调用到此方
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
@@ -119,6 +133,7 @@ public class UartService extends Service {
             }
         }
 
+        //成功发现设备的services时，调用此方法(在调用BluetoothGatt的discoverService之后才会调用此方法)
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             Log.e("TAG","发现服务");
@@ -138,6 +153,7 @@ public class UartService extends Service {
             }
         }
 
+        //发现服务进行注册通知广播（enableTXNotification），当设备有数据传来，会调用次方法
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             Log.e("TAG","获取数据成功");
@@ -417,6 +433,7 @@ public class UartService extends Service {
                     Scmd[1] = (byte)0xa8;
                     TxChar.setValue(Scmd);
                     status = mBluetoothGatt.writeCharacteristic(TxChar);
+                    Log.i("TAG","------a8a8发送状态------：" + status);
                 }else{
                     byte[] bytedata;
                     int count = leng/20;
@@ -435,6 +452,7 @@ public class UartService extends Service {
                         }
                         TxChar.setValue(bytedata);
                         status = mBluetoothGatt.writeCharacteristic(TxChar);
+                        Log.i("TAG","------循环发送状态------：" + status);
 //                        IDField.RetCode retcode = datac(bytedata);
                     }
                     if (status){

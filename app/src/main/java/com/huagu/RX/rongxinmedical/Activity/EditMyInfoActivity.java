@@ -141,7 +141,7 @@ public class EditMyInfoActivity extends BaseActivity implements AdapterView.OnIt
     }
 
     @Override
-    public void Failure(String str, String method, int errorCode) {
+    public void Failure(String str, String method, String errorStr) {
         Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
     }
 

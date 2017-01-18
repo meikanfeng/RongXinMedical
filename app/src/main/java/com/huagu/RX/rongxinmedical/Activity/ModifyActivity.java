@@ -13,7 +13,7 @@ import com.huagu.RX.rongxinmedical.R;
 
 public class ModifyActivity extends BaseActivity {
 
-    private TextView title;
+    private TextView title,tvSuccess,tvSuccessTip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class ModifyActivity extends BaseActivity {
 
         title = (TextView) findViewById(R.id.title);
         title.setText(R.string.modify_title);
+        refresh.setVisibility(View.GONE);
 
         findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
             @Override

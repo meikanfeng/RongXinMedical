@@ -140,7 +140,7 @@ public class MyInfoActivity extends BaseActivity implements RightClickCallBack, 
             }
 
             @Override
-            public void Failure(String str, String method, int errorCode) {
+            public void Failure(String str, String method, String errorStr) {
                 Log.e(method, str.toString());
                 if (method.equals("upload_head")){
                     Toast.makeText(context,R.string.avatar_upLoad_Tips_fail,Toast.LENGTH_SHORT).show();

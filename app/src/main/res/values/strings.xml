@@ -241,6 +241,7 @@
     <string name="position_err">Post cannot be empty</string>
     <string name="name_short">Name is too short</string>
     <string name="name_long">Name is too long</string>
+    <string name="service_err">Service problems</string>
 
 
     <string-array name="week">

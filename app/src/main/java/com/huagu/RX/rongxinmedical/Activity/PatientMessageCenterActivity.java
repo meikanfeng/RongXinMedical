@@ -65,7 +65,7 @@ public class PatientMessageCenterActivity extends BaseActivity implements Adapte
                 patient_message.setAdapter(pma);
             }
             @Override
-            public void Failure(String str, String method, int errorCode) {
+            public void Failure(String str, String method, String errorStr) {
                 Log.e(method,str.toString());
             }
             @Override

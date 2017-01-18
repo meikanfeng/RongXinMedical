@@ -149,7 +149,7 @@ public class MessageListActivity extends BaseActivity {
             }
 
             @Override
-            public void Failure(String str, String method, int errorCode) {
+            public void Failure(String str, String method, String errorStr) {
                 Log.e(method, str.toString());
             }
 

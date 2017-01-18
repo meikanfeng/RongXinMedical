@@ -20,9 +20,10 @@ public interface RequestListener {
      * 请求失败的回调
      * @param str           错误来源（似乎没什么用）
      * @param method        请求的接口方法
-     * @param errorCode     返回的错误码
+     * @param errorStr     返回的错误码
      */
-    void Failure(String str,String method,int errorCode);
+//    void Failure(String str,String method,int errorCode);
+    void Failure(String str,String method,String errorStr);
 
     /**
      * 请求错误的回调

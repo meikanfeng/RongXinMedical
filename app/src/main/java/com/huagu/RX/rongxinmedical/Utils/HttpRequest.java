@@ -58,7 +58,7 @@ public class HttpRequest {
                     if (result.getInt("errorCode")==200){
                         rlistener.Success(method,result);
                     }else{
-                        rlistener.Failure(TAG,method,result.getInt("errorCode"));
+                        rlistener.Failure(TAG,method,result.getJSONObject("data").getString("msg"));
                     }
                 } catch (JSONException e) {
                     rlistener.Error(TAG,method,e);

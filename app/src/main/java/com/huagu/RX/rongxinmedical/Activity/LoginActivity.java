@@ -267,8 +267,8 @@ public class LoginActivity extends BaseActivity implements RequestListener {
     }
 
     @Override
-    public void Failure(String str,String method,int errorCode) {
-        Log.e(str+method,errorCode+"");
+    public void Failure(String str,String method,String errorStr) {
+        Log.e(str+method,errorStr+"");
     }
 
     @Override
