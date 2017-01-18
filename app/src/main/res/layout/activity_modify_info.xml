@@ -7,6 +7,7 @@
     <include layout="@layout/title"/>
 
     <TextView
+        android:id="@+id/tvSuccess"
         android:textSize="@dimen/textsize_20"
         android:layout_marginTop="@dimen/dimen_35"
         android:layout_gravity="center_horizontal"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/tvSuccessTip"
         android:layout_marginTop="@dimen/margin_20"
         android:textSize="@dimen/textsize_20"
         android:layout_gravity="center_horizontal"

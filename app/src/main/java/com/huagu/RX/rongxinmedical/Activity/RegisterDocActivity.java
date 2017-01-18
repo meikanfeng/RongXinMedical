@@ -222,8 +222,8 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void Failure(String str, String method, int errorCode) {
-        Toast.makeText(RegisterDocActivity.this,str,Toast.LENGTH_SHORT).show();
+    public void Failure(String str, String method, String errorStr) {
+        Toast.makeText(RegisterDocActivity.this,errorStr,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -237,43 +237,36 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
         typelist.add(new GoodsNameAndId("Sleep Lab","1"));
         typelist.add(new GoodsNameAndId("Other","2"));
 
-
-        String Country_URL ="http://192.168.1.115:8080/resvent/area/list?country=1";
-        RequestParams rp = new RequestParams(Country_URL);
-        x.http().get(rp, new Callback.CacheCallback<JSONObject>() {
+        //获取城市列表
+        HashMap<String,String> map = new HashMap<>();
+        map.put("country","1");
+        HttpRequest.getInstance().Request("arealist", map, new RequestListener() {
             @Override
-            public void onSuccess(JSONObject result) {
-                try {
-                    JSONArray jarr =result.getJSONArray("varList");
-                    for(int i =0;i<jarr.length();i++){
-                        GoodsNameAndId gd =new GoodsNameAndId(jarr.getJSONObject(i).getString("country_name"),jarr.getJSONObject(i).getString("country_id"));
-                        countrylist.add(gd);
+            public void Success(String method, JSONObject result) throws JSONException {
+                if(!StringUitls.isEmtpy(result.getJSONObject("data").getJSONArray("varList").toString())){
+                    try {
+                        JSONArray jarr =result.getJSONObject("data").getJSONArray("varList");
+                        for(int i =0;i<jarr.length();i++){
+                            GoodsNameAndId gd =new GoodsNameAndId(jarr.getJSONObject(i).getString("country_name"),jarr.getJSONObject(i).getString("country_id"));
+                            countrylist.add(gd);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                }else {
+                    Toast.makeText(RegisterDocActivity.this,result.getJSONObject("data").getString("msg"),Toast.LENGTH_SHORT).show();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
             }
 
             @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
+            public void Failure(String str, String method, String errorStr) {
+                Toast.makeText(RegisterDocActivity.this,errorStr,Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-
-            @Override
-            public boolean onCache(JSONObject result) {
-                return false;
+            public void Error(String str, String method, Throwable ex) {
+                Toast.makeText(RegisterDocActivity.this,str,Toast.LENGTH_SHORT).show();
             }
         });
     }

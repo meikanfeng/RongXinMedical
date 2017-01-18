@@ -7,16 +7,22 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.huagu.RX.rongxinmedical.Entity.GoodsNameAndId;
 import com.huagu.RX.rongxinmedical.Interface.RequestListener;
 import com.huagu.RX.rongxinmedical.R;
 import com.huagu.RX.rongxinmedical.Utils.HttpRequest;
 import com.huagu.RX.rongxinmedical.Utils.StringUitls;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.HashMap;
 
@@ -24,6 +30,7 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
 
     private EditText phone_num,verification_code,user_name,email_address;
     private TextView verification,findpassword_next,findpassword_submit;
+    private ImageView refresh;
 
     private String vcode;
     private String phone;
@@ -56,9 +63,7 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
 
     private void InitView() {
         super.initTile();
-        refresh.setVisibility(View.GONE);
         tcd.setText(R.string.find_password);
-        back.setImageResource(R.drawable.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,12 +74,18 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
         phone_num = (EditText) this.findViewById(R.id.phone_num);
         verification_code = (EditText) this.findViewById(R.id.verification_code);
 
+        refresh = (ImageView) findViewById(R.id.refresh);
         verification = (TextView) this.findViewById(R.id.verification);
         findpassword_next = (TextView) this.findViewById(R.id.findpassword_next);
         findpassword_submit = (TextView) findViewById(R.id. findpassword_submit);
+        user_name = (EditText) findViewById(R.id.user_name);
+        email_address = (EditText) findViewById(R.id.email_address);
+
+        refresh.setVisibility(View.GONE);
 //        findpassword_next.setEnabled(false);
         verification.setOnClickListener(this);
         findpassword_next.setOnClickListener(this);
+        findpassword_submit.setOnClickListener(this);
     }
 
 
@@ -113,30 +124,33 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
                     return ;
                 }
                 HashMap<String,String> map = new HashMap<>();
-                map.put("",name);
-                map.put("",email);
-                HttpRequest.getInstance().Request("", map, new RequestListener() {
+                map.put("USERNAME",name);
+                map.put("EMAIL",email);
+                HttpRequest.getInstance().Request("findPwdSend", map, new RequestListener() {
                     @Override
                     public void Success(String method, JSONObject result) throws JSONException {
-                        Log.i("JSONObject",result.toString());
-                        if (!StringUitls.isEmtpy(result.toString())) {
-                            if(result.getString("data").equals("regiser success")){
-                                Toast.makeText(FindPasswordActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(FindPasswordActivity.this,ModifyActivity.class);
-                                startActivity(intent);
-                                FindPasswordActivity.this.finish();
-                            }else {
-                                Toast.makeText(FindPasswordActivity.this,result.getString("data"),Toast.LENGTH_LONG).show();
-                            }
 
+                        if(!StringUitls.isEmtpy(result.toString())){
+                            try {
+                                String msg =  result.getJSONObject("data").getString("result");
+                                if(msg.equals("success")){
+                                    Intent intent = new Intent(FindPasswordActivity.this,ModifyActivity.class);
+                                    startActivity(intent);
+                                    FindPasswordActivity.this.finish();
+                                }else {
+                                    Toast.makeText(FindPasswordActivity.this,result.getJSONObject("data").getString("msg"),Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }else {
-                            Toast.makeText(FindPasswordActivity.this,R.string.hint_err,Toast.LENGTH_LONG).show();
+                            Toast.makeText(FindPasswordActivity.this,R.string.service_err,Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void Failure(String str, String method, int errorCode) {
-                        Toast.makeText(FindPasswordActivity.this,str,Toast.LENGTH_SHORT).show();
+                    public void Failure(String str, String method, String errorStr) {
+                        Toast.makeText(FindPasswordActivity.this,errorStr,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

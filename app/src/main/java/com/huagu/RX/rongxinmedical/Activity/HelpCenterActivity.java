@@ -106,7 +106,7 @@ public class HelpCenterActivity extends BaseActivity implements RightClickCallBa
             }
 
             @Override
-            public void Failure(String str, String method, int errorCode) {
+            public void Failure(String str, String method, String errorStr) {
                 Log.e(method, str.toString());
             }
 

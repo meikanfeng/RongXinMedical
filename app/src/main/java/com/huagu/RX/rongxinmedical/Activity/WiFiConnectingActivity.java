@@ -108,10 +108,14 @@ public class WiFiConnectingActivity extends BaseActivity {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothManager = BluetoothManager.getinstance();
 
+        /**
+         * 注册、开启服务
+         */
         Intent bindIntent = new Intent(this, UartService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
         InitView();
+        /**注册广播*/
         LocalBroadcastManager.getInstance(this).registerReceiver(UARTStatusChangeReceiver, makeGattUpdateIntentFilter());
 
         Scanbluetooth();
@@ -122,6 +126,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     /**
      * 扫描二维码的回调 这个是21以下的版本才有的
+     * 发现设备
      */
     BluetoothAdapter.LeScanCallback bluetoothcallback = new BluetoothAdapter.LeScanCallback() {
         @Override
@@ -138,6 +143,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     /**
      * 扫描二维码的回调 这个是21以上的版本才有的
+     * 发现设备
      */
     ScanCallback scancallback = new ScanCallback() {
         @Override
@@ -165,6 +171,9 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     private boolean isScan = false;
 
+    /**
+     * 开始连接设备
+     */
     public void connBluetooth() {
         csa.notifyDataSetChanged();
         upload_data.setSelected(true);
@@ -177,6 +186,9 @@ public class WiFiConnectingActivity extends BaseActivity {
         }, 1500);
     }
 
+    /**
+     * 延迟发送，避免发送失败
+     */
     public void sendData() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -197,6 +209,9 @@ public class WiFiConnectingActivity extends BaseActivity {
         if (dialog != null && dialog.isShowing()) dialog.dismiss();
     }
 
+    /**
+     * 开始搜索蓝牙
+     */
     public void Scanbluetooth() {
         if (mService != null && mService.isconnected() == UartService.STATE_DISCONNECTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//判断版本使用搜索蓝牙的回调
@@ -208,6 +223,10 @@ public class WiFiConnectingActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * 服务连接
+     */
     private UartService mService;
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
@@ -237,6 +256,9 @@ public class WiFiConnectingActivity extends BaseActivity {
         return intentFilter;
     }
 
+    /**
+     * 广播接收
+     */
     private BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
 
         public void onReceive(Context context, Intent intent) {
@@ -304,7 +326,7 @@ public class WiFiConnectingActivity extends BaseActivity {
                         sendwifi = false;
                         if (!StringUitls.isEmtpy(device.getAddress()))
                             setSendwifi();
-                        return;
+                            return;
                     }
                     if ("profile".equals(json.getJSONObject("header").getString("module"))){
                         if (!json.getJSONObject("body").has("result_code")) return;
@@ -338,6 +360,9 @@ public class WiFiConnectingActivity extends BaseActivity {
     };
 
 
+    /**
+     * 获取wifi连接状态
+     */
     private void senfGetstatus() {
         Log.i("TAG","获取WiFi发送状态");
         Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", device.getAddress(), "get", "profile");
@@ -363,6 +388,9 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     private boolean sendwifi = true;
 
+    /**
+     * 发送wifi名称和密码
+     */
     public void setSendwifi() {
         Log.i("TAG","发送WiFi名称和密码");
         Log.e("wifi名称",wifiname);
@@ -393,16 +421,24 @@ public class WiFiConnectingActivity extends BaseActivity {
 
     Handler timeouthandler = new Handler();
 
+    /**
+     * 定时发送wifi/十秒
+     */
     Runnable timeoutrunnable = new Runnable() {
         @Override
         public void run() {
+            Log.i("TAG","定时发送wifi/十秒");
             setSendwifi();
         }
     };
 
+    /**
+     * 获取wifi连接状态
+     */
     Runnable getststusrunnable = new Runnable() {
         @Override
         public void run() {
+            Log.i("TAG","获取wifi连接状态");
             senfGetstatus();
         }
     };
