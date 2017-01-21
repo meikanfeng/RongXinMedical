@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.huagu.RX.rongxinmedical.Adapter.DeviceInfoAdapter;
 import com.huagu.RX.rongxinmedical.Dialog.DialogShows;
 import com.huagu.RX.rongxinmedical.Interface.DialogShowsOkLinstener;
 import com.huagu.RX.rongxinmedical.R;
@@ -75,7 +76,7 @@ public class WiFiConfirmInfoSettingActivity extends BaseActivity implements View
 
     @Override
     public void ClickOK(DialogShowsOkLinstener dialog,String tag) {
-        Intent intent = new Intent(this,WiFiConnectingActivity.class);
+        Intent intent = new Intent(this,DeviceListActivity.class);//WiFiConnectingActivity
         intent.putExtra("wifiname", wifiname);
         intent.putExtra("wifipassword", wifipassword);
         startActivity(intent);

@@ -126,11 +126,11 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
                     Toast.makeText(RegisterDocActivity.this, R.string.forget_password,Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(passWord.length() < 6 ){
+                if(passWord.length() < 8 ){
                     Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
                     return ;
                 }
-                if(passWord.length() > 15 ){
+                if(passWord.length() > 16 ){
                     Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
                     return ;
                 }
@@ -138,11 +138,11 @@ public class RegisterDocActivity extends BaseActivity implements View.OnClickLis
                     Toast.makeText(RegisterDocActivity.this, R.string.forget_password,Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(surePassWord.length() < 6 ){
+                if(surePassWord.length() < 8 ){
                     Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
                     return ;
                 }
-                if(surePassWord.length() > 15 ){
+                if(surePassWord.length() > 16 ){
                     Toast.makeText(RegisterDocActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
                     return ;
                 }

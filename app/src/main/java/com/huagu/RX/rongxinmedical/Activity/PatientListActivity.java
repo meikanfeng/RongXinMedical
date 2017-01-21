@@ -2,8 +2,6 @@ package com.huagu.RX.rongxinmedical.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,14 +11,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.huagu.RX.rongxinmedical.Adapter.HelpCenterAdapter;
 import com.huagu.RX.rongxinmedical.Adapter.PatientListAdapter;
 import com.huagu.RX.rongxinmedical.Entity.Patient;
 import com.huagu.RX.rongxinmedical.Interface.RequestListener;
@@ -28,18 +20,13 @@ import com.huagu.RX.rongxinmedical.Interface.RightClickCallBack;
 import com.huagu.RX.rongxinmedical.R;
 import com.huagu.RX.rongxinmedical.Utils.HttpRequest;
 import com.huagu.RX.rongxinmedical.Utils.MyWindowsManage;
-import com.huagu.RX.rongxinmedical.View.TextClickDateView;
 import com.huagu.RX.rongxinmedical.widget.menudrawer.MenuDrawer;
 import com.huagu.RX.rongxinmedical.widget.menudrawer.Position;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class PatientListActivity extends BaseSideslipActivity implements RightClickCallBack, AdapterView.OnItemClickListener {

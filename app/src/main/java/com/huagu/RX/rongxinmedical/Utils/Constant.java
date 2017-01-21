@@ -9,9 +9,9 @@ public class Constant {
 
 //    public static final String URL = "http://java.lucland.com/resvent/app/api/v1/";
 //    public static final String URL = "http://192.168.10.10:8080/resvent/app/api/v1/";
-//    public static final String URL = "http://120.76.206.62:8080/resvent/app/api/v1/";//线上
+    public static final String URL = "http://120.76.206.62:8080/resvent/app/api/v1/";//线上
 //    public static final String URL = "http://192.168.199.134:8080/resvent/app/api/v1/";//向军
-    public static final String URL = "http://192.168.1.115:8080/resvent/app/api/v1/";//
+//    public static final String URL = "http://192.168.1.115:8080/resvent/app/api/v1/";//涛哥
 
 
 

@@ -118,10 +118,13 @@ public class HomeFragment extends Fragment implements OnDateSelectListener {
         cirscview.setName("Score", 0);
         cirscview.setPosition(0);
 
+        //progress点击事件
         cirscview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), SleepQualityRankingsActivity.class));
+                Intent intent = new Intent(getActivity(), SleepQualityRankingsActivity.class);
+                intent.putExtra("timestamp",timestamp + "");
+                getActivity().startActivity(intent);
             }
         });
 
