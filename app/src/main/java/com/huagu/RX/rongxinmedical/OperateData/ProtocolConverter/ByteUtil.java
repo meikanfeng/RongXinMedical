@@ -62,6 +62,28 @@ public class ByteUtil {
 		}
 		return bytes;
 	}
+	//讲获取的mac转化为指定的string
+	public static String DevidToSn(String devid) {
+		if(devid.length() > 4)
+		{
+			StringBuilder Sn = new StringBuilder("");
+			char[] hexs = devid.toCharArray();
+			byte[] bytes = setDevid(devid);
+			char sn0 = (char) (bytes[0] - 10 + 'A');
+			char sn1 = (char) (bytes[1] - 10 + 'A');
+			Sn.append(String.valueOf(sn0));
+			Sn.append(String.valueOf(sn1));
+			Sn.append(String.valueOf('-'));
+			for (int i = 4; i < hexs.length; i++) {
+				Sn.append(String.valueOf(hexs[i]));
+			}
+			return Sn.toString().toUpperCase().trim();
+		}
+		else
+		{
+			return "";
+		}
+	}
 	public static String getStr(byte[] b, int index) {
 		int i;
 		for (i = index; i < b.length; i++) {

@@ -28,6 +28,7 @@ public class SleepQualityRankingsActivity extends BaseActivity {
     private ImageView back ,refresh;
 
     private String pid;
+    private String timestamp = "";
     private SleepQualityRankingsAdapter sqra;
     private List<SleepRank> sleepRankslist;
     private HashMap<String,String> map;
@@ -37,11 +38,13 @@ public class SleepQualityRankingsActivity extends BaseActivity {
         setContentView(R.layout.activity_sleep_quality_rankings);
 
         pid = usershared.getString("USER_ID","");
+        Log.e("timestamp",""+timestamp);
 
         InitView();
-
+        timestamp = getIntent().getStringExtra("timestamp");
         map = new HashMap<String,String>();
         map.put("pid",pid);
+        map.put("timestamp",timestamp.isEmpty() ? "" : timestamp);
         getData("sleepQualityRankings", map);
     }
 

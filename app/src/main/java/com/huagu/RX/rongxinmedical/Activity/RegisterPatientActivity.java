@@ -86,6 +86,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
         country.setOnClickListener(this);
         device_model.setOnClickListener(this);
         register_submit.setOnClickListener(this);
+        register_cancle.setOnClickListener(this);
 
         getCountryList();
         getModel();
@@ -212,7 +213,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
             case R.id.register_submit://提交
                 submitMethod();
                 break;
-            case R.id.register_cancle:
+            case R.id.register_cancle://取消
                 finish();
                 break;
         }
@@ -230,7 +231,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
         String phone = phone_num.getText().toString().trim();
         String city = country.getText().toString().trim();
         String deviceModel = device_model.getText().toString().trim();
-        String serialNum = serial_num.getText().toString().trim();
+        String serialNum = serial_num.getText().toString().trim().toUpperCase();
 
         if(StringUitls.isEmtpy(name)){
             Toast.makeText(RegisterPatientActivity.this, R.string.forget_name,Toast.LENGTH_LONG).show();
@@ -252,11 +253,11 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_password,Toast.LENGTH_LONG).show();
             return ;
         }
-        if(userPassword.length() < 6 ){
+        if(userPassword.length() < 8 ){
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
             return ;
         }
-        if(userPassword.length() > 15 ){
+        if(userPassword.length() > 16 ){
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
             return ;
         }
@@ -265,11 +266,11 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_password,Toast.LENGTH_LONG).show();
             return ;
         }
-        if(confirmPassword.length() < 6 ){
+        if(confirmPassword.length() < 8 ){
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_err,Toast.LENGTH_LONG).show();
             return ;
         }
-        if(confirmPassword.length() > 15 ){
+        if(confirmPassword.length() > 16 ){
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_passWord_long,Toast.LENGTH_LONG).show();
             return ;
         }
@@ -317,11 +318,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_num,Toast.LENGTH_LONG).show();
             return ;
         }
-        if(!serialNum.startsWith("GA")){
-            Toast.makeText(RegisterPatientActivity.this,R.string.forget_num_err,Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(!serialNum.contains("-")){
+        if(!serialNum.startsWith("GA-") && !serialNum.startsWith("GB-")){
             Toast.makeText(RegisterPatientActivity.this,R.string.forget_num_err,Toast.LENGTH_LONG).show();
             return;
         }
@@ -338,7 +335,7 @@ public class RegisterPatientActivity extends BaseActivity implements View.OnClic
         hash.put("FIRST_NAME", firstName);
         hash.put("LAST_NAME", lastName);
         hash.put("SEX", sex);//不知道他们是要ID还是NAME，ID的话改成 sexid;
-        hash.put("BIRTH", dateBirth);
+        hash.put("BIRTH", StringUitls.dataOne(dateBirth));
         hash.put("EMAIL", email);
         hash.put("PHONE", phone);
         hash.put("COUNTRY",city);

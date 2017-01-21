@@ -182,7 +182,7 @@
     <string name="doctor">我是医生</string>
     <string name="patient">我是病人</string>
     <string name="please_input_info">请输入您的信息</string>
-    <string name="password_notiry">6-15字</string>
+    <string name="password_notiry">8-16字</string>
     <string name="first_name">名字*</string>
     <string name="last_name">姓*</string>
     <string name="institution">机构*</string>
@@ -242,6 +242,8 @@
     <string name="name_short">名字过短</string>
     <string name="name_long">名字过长</string>
     <string name="service_err">服务出现问题</string>
+    <string name="device">设备</string>
+    <string name="device_list">设备列表</string>
 
     <string-array name="week">
         <item>星期天</item>

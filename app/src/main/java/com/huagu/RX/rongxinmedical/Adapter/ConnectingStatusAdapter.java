@@ -61,7 +61,7 @@ public class ConnectingStatusAdapter extends BaseAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        if (size<5){
+        if (size<=5){
             size ++;
         }
         super.notifyDataSetChanged();

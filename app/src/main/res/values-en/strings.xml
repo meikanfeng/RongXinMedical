@@ -181,7 +181,7 @@
     <string name="doctor">I\'m a doctor</string>
     <string name="patient">I\'m a patient</string>
     <string name="please_input_info">Please input your information</string>
-    <string name="password_notiry">6-15characters</string>
+    <string name="password_notiry">8-16characters</string>
     <string name="first_name">First Name*</string>
     <string name="last_name">Last Name*</string>
     <string name="institution">Institution*</string>
@@ -243,6 +243,8 @@
     <string name="name_short">Name is too long</string>
     <string name="name_long">Name is too long</string>
     <string name="service_err">Service problems</string>
+    <string name="device">Device</string>
+    <string name="device_list">Device list</string>
 
     <string-array name="week">
         <item>Sunday</item>

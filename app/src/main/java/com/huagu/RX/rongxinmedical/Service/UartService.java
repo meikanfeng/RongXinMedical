@@ -122,14 +122,12 @@ public class UartService extends Service {
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 Log.e("TAG","断开服务");
                 if (mBluetoothGatt != null)
-//                    mBluetoothGatt.disconnect();
-                close();
-                mBluetoothGatt = null;
+                    close();
                 intentAction = ACTION_GATT_DISCONNECTED;
+                broadcastUpdate(intentAction);
                 if(mConnectionState == STATE_CONNECTED) connect(device.getAddress());
                 mConnectionState = STATE_DISCONNECTED;
                 Log.i(TAG, "Disconnected from GATT server.");
-                broadcastUpdate(intentAction);
             }
         }
 
@@ -138,6 +136,7 @@ public class UartService extends Service {
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             Log.e("TAG","发现服务");
             if (status == BluetoothGatt.GATT_SUCCESS) {
+                enableTXNotification();//注册设备通知广播
             	Log.w(TAG, "mBluetoothGatt = " + mBluetoothGatt);
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             } else {
@@ -309,15 +308,23 @@ public class UartService extends Service {
      *         callback.
      */
     public boolean connect(final String address) {
-        Log.e("TAG","开始找服务");
+        Log.e("TAG","准备开始服务");
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
             return false;
         }
 
-        if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress) && mBluetoothGatt != null) {
-            mBluetoothGatt.close();
-        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress) && mBluetoothGatt != null) {
+                    mBluetoothGatt.disconnect();
+                    mBluetoothGatt.close();
+                    mBluetoothGatt = null;
+                }
+            }
+        },2000);
+
         device = mBluetoothAdapter.getRemoteDevice(address);
         if (device == null) {
             Log.w(TAG, "Device not found.  Unable to connect.");
@@ -446,7 +453,7 @@ public class UartService extends Service {
                             bytedata = Arrays.copyOfRange(str,20*i,20*(i+1));
                         }
                         try {
-                            Thread.sleep(120);
+                            Thread.sleep(300);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
