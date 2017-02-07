@@ -27,7 +27,7 @@
             app:layout_marginLeftPercent="8%w"
             app:layout_marginRightPercent="8%w"
             app:layout_marginTopPercent="5%h"
-            android:text="a1"
+            android:text="716B_TPLINK_2.4G"
             android:hint="Wi-Fi:"
             android:background="@drawable/edit_bg"/>
 
@@ -38,7 +38,7 @@
             app:layout_marginLeftPercent="8%w"
             app:layout_marginRightPercent="8%w"
             app:layout_marginTopPercent="3%h"
-            android:text="12345678"
+            android:text="ZYC@ll*4008883918"
             android:hint="wifi password"
             android:background="@drawable/edit_bg"/>
 
