@@ -42,6 +42,7 @@ public class WiFiConnectingActivity extends BaseActivity {
     private String wifiname;
     private String wifipassword;
     private String address;
+    private boolean flag = true;
 
     public WiFiConnectingActivity instances;
 
@@ -97,6 +98,7 @@ public class WiFiConnectingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_connecting);
+        flag = true;
         instances = this;
 
         wifiname = getIntent().getStringExtra("wifiname");
@@ -154,7 +156,7 @@ public class WiFiConnectingActivity extends BaseActivity {
             public void run() {
                 connBluetooth();
             }
-        },1500);
+        },2000);
     }
 
     private boolean isScan = false;
@@ -182,7 +184,7 @@ public class WiFiConnectingActivity extends BaseActivity {
             public void run() {
                 DeviceListActivity.getInstance().mService.write(null, "", 0);//发送a8a8
             }
-        }, 1000);
+        }, 1500);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -216,44 +218,45 @@ public class WiFiConnectingActivity extends BaseActivity {
            /*GATT 连接成功*/
             if (action.equals(UartService.ACTION_GATT_CONNECTED)) {
 //                Toast.makeText(WiFiConnectingActivity.this, "连接成功..", Toast.LENGTH_LONG).show();
-                Log.e("TAG","连接成功..");
                 csa.notifyDataSetChanged();
                 upload_data.setSelected(true);
-                DeviceListActivity.getInstance().mService.setdiscoverServices();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DeviceListActivity.getInstance().mService.setdiscoverServices();
+                    }
+                },2500);
             }
 
             /*GATT 断开连接*/
             if (action.equals(UartService.ACTION_GATT_DISCONNECTED)) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(WiFiConnectingActivity.this, "服务断开连接..", Toast.LENGTH_LONG).show();
-                    }
-                });
+                showTip("服务断开连接..");
             }
 
             /*GATT 发现服务*/
             if (action.equals(UartService.ACTION_GATT_SERVICES_DISCOVERED)) {
-//                Toast.makeText(WiFiConnectingActivity.this, "发现服务", Toast.LENGTH_LONG).show();
-                Log.e("TAG","发现服务");
-                csa.notifyDataSetChanged();
-                upload_data.setSelected(true);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        DeviceListActivity.getInstance().mService.enableTXNotification();//注册设备通知广播
-                    }
-                },500);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        sendData();//发送wifi
-                    }
-                },500);
+                if(flag){
+                    flag = false;
+                    csa.notifyDataSetChanged();
+                    upload_data.setSelected(true);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            DeviceListActivity.getInstance().mService.enableTXNotification();//注册设备通知广播
+                        }
+                    },2500);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendData();//发送wifi
+                        }
+                    },1500);
+                }
             }
 
             /*GATT 接收数据*/
             if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
+                flag = true;
                 final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
                 try {
                     String text = new String(txValue, "UTF-8");
@@ -264,6 +267,7 @@ public class WiFiConnectingActivity extends BaseActivity {
             }
 
             if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
+                flag = true;
                 boolean boo = intent.getBooleanExtra(UartService.IS_SUCCESS, false);
                 if (boo) {
                     Toast.makeText(MainActivity.getInstance(), System.currentTimeMillis() + " ACTION_DATA_AVAILABLE:成功", Toast.LENGTH_SHORT).show();
@@ -274,6 +278,7 @@ public class WiFiConnectingActivity extends BaseActivity {
 
             /*GATT 接收数据*/
             if (action.equals(UartService.ACTION_DATA_Notification)) {  // 接收到通知消息
+                flag = true;
                 String txValue = intent.getStringExtra(UartService.EXTRA_DATA);
                 Log.e("xxxxxxxxxxxxx","  ffffff: "+ txValue);
                 try {
@@ -295,16 +300,16 @@ public class WiFiConnectingActivity extends BaseActivity {
 //                            SpannableString msp = new SpannableString(tip);
 //                            msp.setSpan(new ForegroundColorSpan(Color.MAGENTA), 0, tip.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 //                            Toast.makeText(WiFiConnectingActivity.this, msp, Toast.LENGTH_SHORT).show();
-                            Log.e("TAG","wifi链接成功");
+                            showTip("wifi链接成功...");
                         } else if (resultCode == 145) {
 //                            Toast.makeText(WiFiConnectingActivity.this, "wifi连接中...", Toast.LENGTH_SHORT).show();
                             Log.e("TAG","wifi连接中...");
                         } else if (resultCode == 146) {
-                            Toast.makeText(WiFiConnectingActivity.this, "连接路由器失败", Toast.LENGTH_SHORT).show();
+                            showTip("连接路由器失败");
                         } else if (resultCode == 147) {
-                            Toast.makeText(WiFiConnectingActivity.this, "请打开设备wifi", Toast.LENGTH_SHORT).show();
+                            showTip("请打开设备wifi");
                         } else if (resultCode == 148) {
-                            Toast.makeText(WiFiConnectingActivity.this, "请检查路由器是否有网", Toast.LENGTH_SHORT).show();
+                            showTip("请检查路由器是否有网");
                         }
                     }
                 } catch (JSONException e) {
@@ -315,13 +320,22 @@ public class WiFiConnectingActivity extends BaseActivity {
         }
     };
 
+    private void showTip(final String tip){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(WiFiConnectingActivity.this, tip, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     /**
      * 获取wifi连接状态
      */
     private void senfGetstatus() {
         Log.i("TAG","获取WiFi发送状态");
-        Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", address, "get", "profile");
+        Map<String, String> header = WriteDataUtils.getInstance().getHeader("0", address, "get", "profile");//   "14", address, "get", "profile"
         Map<String, String> body = new HashMap<String, String>();
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
         wifidata.put("header", header);
@@ -349,7 +363,8 @@ public class WiFiConnectingActivity extends BaseActivity {
         Log.i("TAG","发送WiFi名称和密码");
         Log.e("wifi名称",wifiname);
         Log.e("wifi密码",wifipassword);
-        Map<String, String> header = WriteDataUtils.getInstance().getHeader("14", address, "set", "profile");
+        Map<String, String> header = WriteDataUtils.getInstance().getHeader("0", address, "set", "profile");//   "14", address, "get", "profile"
+        //XXX 修改路由器的类型？？？？
         Map<String, String> body = WriteDataUtils.getInstance().getBody(wifiname, "wpa", wifipassword);
         Map<String, Map<String, String>> wifidata = new HashMap<String, Map<String, String>>();
         wifidata.put("header", header);
@@ -360,9 +375,8 @@ public class WiFiConnectingActivity extends BaseActivity {
             ToPacket topacket = new ToPacket();
             IDField.RetCode idfield = topacket.build(json);
             Log.e("buildstatus", idfield.name());
-            byte[] b = topacket.getData();
             Log.e("xxxxxxxxxxxxxx", "sendDate :" + System.currentTimeMillis());
-            DeviceListActivity.getInstance().mService.write(b, "data", topacket.getLength());
+            DeviceListActivity.getInstance().mService.write(topacket.getData(), "data", topacket.getLength());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -399,5 +413,11 @@ public class WiFiConnectingActivity extends BaseActivity {
                 Toast.makeText(WiFiConnectingActivity.this, str, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        flag = true;
     }
 }

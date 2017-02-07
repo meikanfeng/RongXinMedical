@@ -29,7 +29,7 @@ public class WriteDataUtils {
     public Map<String,String> getHeader(String msg_id,String dev_id, String action, String module){
         Map<String, String> header = new HashMap<String, String>();
         header.put("msg_id",msg_id);
-        header.put("dev_id",dev_id);//设备号
+        header.put("dev_id","000000000000");//dev_id
         header.put("action",action);
         header.put("module",module);
 

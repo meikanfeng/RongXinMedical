@@ -245,6 +245,7 @@
     <string name="service_err">Service problems</string>
     <string name="device">Device</string>
     <string name="device_list">Device list</string>
+    <string-array name="device_filter"><item>iBreeze CPAP</item><item>iBreeze BPAP</item><item>resvent</item></string-array>
 
     <string-array name="week">
         <item>Sunday</item>

@@ -10,15 +10,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.huagu.RX.rongxinmedical.Adapter.DeviceInfoAdapter;
 import com.huagu.RX.rongxinmedical.R;
@@ -46,6 +43,7 @@ public class DeviceListActivity extends  BaseActivity {
     private String wifiname;
     private String wifipassword;
     private static DeviceListActivity deviceActivity;
+    private String[] mDeviceFilter;
 
     public static DeviceListActivity getInstance(){
         return deviceActivity;
@@ -56,6 +54,8 @@ public class DeviceListActivity extends  BaseActivity {
         super.onCreate(savedInstanceState);
         deviceActivity = this;
         setContentView(R.layout.activity_device_list);
+
+        mDeviceFilter = getResources().getStringArray(R.array.device_filter);
 
         wifiname = getIntent().getStringExtra("wifiname");
         wifipassword = getIntent().getStringExtra("wifipassword");
@@ -105,12 +105,15 @@ public class DeviceListActivity extends  BaseActivity {
                 @Override
                 public void run() {
                     if (!isScan) return;
-                    if (!StringUitls.isEmtpy(device.getName()) && "resvent".equals(device.getName())) {
+                    if (!StringUitls.isEmtpy(device.getName()) &&
+                            (mDeviceFilter[0].equals(device.getName()) || mDeviceFilter[1].equals(device.getName())
+                                    || mDeviceFilter[2].equals(device.getName()))) {
                         if(!deviceList.contains(device)){
                             deviceList.add(device);
                             infoAdapter.notifyDataSetChanged();
                         }
                     }
+
                 }
             });
 
@@ -143,7 +146,9 @@ public class DeviceListActivity extends  BaseActivity {
                 @Override
                 public void run() {
                     if (!isScan) return;
-                    if (!StringUitls.isEmtpy(result.getDevice().getName()) && "resvent".equals(result.getDevice().getName())) {
+                    if (!StringUitls.isEmtpy(result.getDevice().getName()) &&
+                            (mDeviceFilter[0].equals(result.getDevice().getName()) || mDeviceFilter[1].equals(result.getDevice().getName())
+                             || mDeviceFilter[2].equals(result.getDevice().getName()))) {
                         if(!deviceList.contains(result.getDevice())){
                             deviceList.add(result.getDevice());
                             infoAdapter.notifyDataSetChanged();

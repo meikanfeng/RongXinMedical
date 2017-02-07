@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.huagu.RX.rongxinmedical.OperateData.ProtocolConverter.ByteUtil;
 import com.huagu.RX.rongxinmedical.R;
 
 import java.util.List;
@@ -49,15 +50,15 @@ public class DeviceInfoAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
             holder.tvSN = (TextView) convertView.findViewById(R.id.tvSN);
-//            holder.tvSSI = (TextView) convertView.findViewById(R.id.tvSSI);
+            holder.tvSSI = (TextView) convertView.findViewById(R.id.tvSSI);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         holder.tvName.setText(deviceList.get(position).getName());
-        holder.tvSN.setText(deviceList.get(position).getAddress());
-//        holder.tvSSI.setText(R.string.device + (position + 1));
+        holder.tvSN.setText("SN:" + ByteUtil.DevidToSn(deviceList.get(position).getAddress().replaceAll(":", "")));
+        holder.tvSSI.setText((position + 1) + "");
 
         return convertView;
     }
@@ -65,6 +66,6 @@ public class DeviceInfoAdapter extends BaseAdapter {
     class ViewHolder{
         private TextView tvName;
         private TextView tvSN;
-//        private TextView tvSSI;
+        private TextView tvSSI;
     }
 }
