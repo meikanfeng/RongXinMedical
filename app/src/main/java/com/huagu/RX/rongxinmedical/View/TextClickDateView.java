@@ -152,20 +152,48 @@ public class TextClickDateView extends LinearLayout {
     private PopupWindow pw;
     private View PopupVIew;//popup的view
 
-    private ViewPager viewpager;//暂时没用
+    private CustomViewPager viewpager;//暂时没用
 //    private DateGridView dategridview;//日历
     private PopupPagerAdapter ppa;
     public void showPopupwindow(View v) {
 
         PopupVIew = lif.inflate(R.layout.date_popupview, null, false);
 
-        viewpager = (ViewPager) PopupVIew.findViewById(R.id.datePager);
+        viewpager = (CustomViewPager) PopupVIew.findViewById(R.id.datePager);
         ppa = new PopupPagerAdapter();
         ppa.setdata(curyear, curmonth);
         viewpager.setAdapter(ppa);
         viewpager.setCurrentItem(ppa.y_mlist.size()-1);
 //        dategridview.setDateAdapter();
-        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewpager.setChangeViewCallback(new CustomViewPager.ChangeViewCallback() {
+            private boolean nowLeft;
+            private boolean nowRight;
+            @Override
+            public void changeView(boolean left, boolean right) {
+                //往左边滑动：  左true  右false
+                //往右边滑动：  左false  右true
+                nowLeft = left;
+                nowRight = right;
+            }
+
+            @Override
+            public void getCurrentPageIndex(int index) {
+                String month = months[ppa.y_mlist.get(index).getMonth()];
+                if(month.equals(months[months.length -1])){//12月  Dec
+                    if(nowRight){
+                        curyear --;
+                    }
+                }
+                if(month.equals(months[0])){//一月  Jan
+                    if(nowLeft){
+                        if(curyear != maxyear)
+                           curyear ++;
+                    }
+                }
+                date.setText(String.format("%1$s %2$s %3$s,%4$d", weeks[curweek - 1], month , ((curday < 10) ? "0" + curday : "" + curday), curyear));
+            }
+        });
+        /*viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -173,13 +201,16 @@ public class TextClickDateView extends LinearLayout {
             @Override
             public void onPageSelected(int position) {
 //                ppa.y_mlist.get(position).getMonth()
+
+
                 date.setText(String.format("%1$s %2$s %3$s,%4$d", weeks[curweek - 1], months[ppa.y_mlist.get(position).getMonth()], ((curday < 10) ? "0" + curday : "" + curday), curyear));
             }
             @Override
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+
+        });*/
 
         pw = new PopupWindow(PopupVIew, MyWindowsManage.getWidth(context), MyWindowsManage.getWidth(context) - DensityUtil.dip2px(50));
         pw.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
