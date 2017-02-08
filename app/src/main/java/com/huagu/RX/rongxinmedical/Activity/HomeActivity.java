@@ -112,16 +112,17 @@ public class HomeActivity extends BaseSideslipActivity implements HomeFragment.O
      */
     public void getDateList() {
         dymd = new ArrayList<Date_YMD>();
-        long starttime = Long.valueOf(reg_time);
-        time = System.currentTimeMillis();
+        long starttime = Long.valueOf(reg_time);//注册日期
+        time = System.currentTimeMillis();//当前日期
         totalpager = ((int) ((time - starttime) / ONEDAY_TIMESTAMP));
         calendar = Calendar.getInstance();
         for (int i = 0; i < (totalpager + 1); i++) {
             long timestamp = time - (time % ONEDAY_TIMESTAMP) - ((totalpager - i) * ONEDAY_TIMESTAMP);
             calendar.setTimeInMillis(timestamp);
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int year = calendar.get(Calendar.YEAR);//年
+            int month = calendar.get(Calendar.MONTH);//月
+            int day = calendar.get(Calendar.DAY_OF_MONTH);//日
+            //设置在时间区间内的时间
             calendar.set(Calendar.HOUR_OF_DAY, 12);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
